@@ -619,7 +619,18 @@
 
         // After Isya (check if all prayers passed) and before midnight
         if (isAfterIsya() && currentHour < 24) {
-            titleEl.textContent = 'Jadwal untuk Besok';
+            // Get tomorrow's date
+            const tomorrow = new Date(now);
+            tomorrow.setDate(now.getDate() + 1);
+
+            const dateStr = tomorrow.toLocaleDateString('id-ID', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+
+            titleEl.innerHTML = `Jadwal untuk Besok <span class="tomorrow-date">${dateStr}</span>`;
         } else {
             titleEl.textContent = 'Jadwal Hari Ini';
         }
@@ -773,6 +784,35 @@
         });
     }
 
+    // PWA Install Prompt
+    function setupPWAInstall() {
+        let deferredPrompt;
+        const footerInstallBtn = document.getElementById('footerInstallBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        if (footerInstallBtn) {
+            footerInstallBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`User response to the install prompt: ${outcome}`);
+                    deferredPrompt = null;
+                } else {
+                    showNotification('Aplikasi sudah terpasang atau browser tidak mendukung.', 'info');
+                }
+            });
+        }
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            showNotification('Aplikasi berhasil dipasang!', 'success');
+        });
+    }
+
     // Initialize
     async function init() {
         // Load Ramadhan configuration first
@@ -784,6 +824,7 @@
         setupOrganization();
         setupScheduleToggle();
         setupBackToTop();
+        setupPWAInstall();
 
         // Update dynamic year elements from Ramadhan config
         if (ramadhanConfig) {

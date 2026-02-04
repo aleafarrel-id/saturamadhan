@@ -53,6 +53,22 @@
     margin: var(--sp-6) 0;
 }
 
+.tomorrow-date {
+    font-size: var(--fs-md);
+    color: var(--clr-accent-500);
+    font-weight: var(--fw-normal);
+    margin-left: var(--sp-2);
+}
+
+@media (max-width: 768px) {
+    .tomorrow-date {
+        display: block;
+        margin-left: 0;
+        margin-top: var(--sp-2);
+        font-size: var(--fs-sm);
+    }
+}
+
 @media (max-width: 768px) {
     .hero {
         padding: var(--sp-6) 0 var(--sp-4);
