@@ -1,7 +1,7 @@
 /**
- * Satura Ramadhan - Prayer Times Module
- * Handler untuk waktu sholat dan imsak
- * Termasuk caching dan kalkulasi waktu
+ * Satu Ramadhan - Prayer Times Module
+ * Prayer times and imsak handler
+ * Includes caching and time calculations
  */
 
 const SaturaPrayer = (function () {

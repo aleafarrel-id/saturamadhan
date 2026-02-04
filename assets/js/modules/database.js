@@ -1,7 +1,7 @@
 /**
- * Satura Ramadhan - Database Module
- * Handler untuk database lokal (province.json, regency.json)
- * Menyediakan fungsi untuk load, search, dan filter data wilayah
+ * Satu Ramadhan - Database Module
+ * Local database handler for province.json and regency.json
+ * Provides load, search, and filter functions for regional data
  */
 
 const SaturaDatabase = (function () {
@@ -28,7 +28,9 @@ const SaturaDatabase = (function () {
 
         try {
             SaturaConfig.log('Loading provinces database...');
-            const response = await fetch(SaturaConfig.DATABASE.paths.provinces);
+            // Add cache-busting to ensure fresh data
+            const cacheBuster = `?v=${Date.now()}`;
+            const response = await fetch(SaturaConfig.DATABASE.paths.provinces + cacheBuster);
 
             if (!response.ok) {
                 throw new Error(`Failed to load provinces: ${response.status}`);
@@ -55,7 +57,9 @@ const SaturaDatabase = (function () {
 
         try {
             SaturaConfig.log('Loading regencies database...');
-            const response = await fetch(SaturaConfig.DATABASE.paths.regencies);
+            // Add cache-busting to ensure fresh data
+            const cacheBuster = `?v=${Date.now()}`;
+            const response = await fetch(SaturaConfig.DATABASE.paths.regencies + cacheBuster);
 
             if (!response.ok) {
                 throw new Error(`Failed to load regencies: ${response.status}`);

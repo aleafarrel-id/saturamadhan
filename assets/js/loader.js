@@ -1,6 +1,6 @@
 /**
- * Satura Ramadhan - Module Loader
- * Dynamic script loading with premium splash screen
+ * Satu Ramadhan - Module Loader
+ * Dynamic script loading with splash screen
  * Handles cache version checking and auto-refresh
  */
 
@@ -8,7 +8,7 @@
     'use strict';
 
     // App version - increment when deploying updates
-    const APP_VERSION = '1.1.3';
+    const APP_VERSION = '1.2.1';
     const VERSION_KEY = 'satura_app_version';
 
     // Splash screen elements
@@ -40,8 +40,6 @@
 
         // Lock body scroll
         document.body.classList.add('splash-active');
-
-        console.log('[Loader] Splash screen initialized');
     }
 
     /**
@@ -68,14 +66,11 @@
             // Unlock body scroll
             document.body.classList.remove('splash-active');
 
-            // Remove splash from DOM after animation
             setTimeout(() => {
                 if (splashScreen && splashScreen.parentNode) {
                     splashScreen.parentNode.removeChild(splashScreen);
                 }
             }, 500);
-
-            console.log('[Loader] Splash screen hidden');
         }
     }
 
@@ -117,8 +112,6 @@
                 throw error;
             }
         }
-
-        console.log('[Loader] All modules loaded successfully');
     }
 
     /**
@@ -129,7 +122,6 @@
             const storedVersion = localStorage.getItem(VERSION_KEY);
 
             if (storedVersion && storedVersion !== APP_VERSION) {
-                console.log(`[Loader] Version changed: ${storedVersion} → ${APP_VERSION}`);
                 updateProgress(5, 'Memperbarui cache...');
 
                 // Clear old caches
@@ -178,7 +170,6 @@
      * Handle online event
      */
     function handleOnline() {
-        console.log('[Loader] Back online, checking for updates...');
         checkForUpdates();
         checkVersionAndRefresh();
     }
@@ -212,8 +203,6 @@
      * Initialize loader
      */
     async function init() {
-        console.log(`[Loader] Initializing Satura Ramadhan v${APP_VERSION}`);
-
         // Initialize splash screen
         initSplash();
 

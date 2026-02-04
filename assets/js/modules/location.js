@@ -1,7 +1,7 @@
 /**
- * Satura Ramadhan - Location Module
- * Handler untuk geolocation dan manajemen lokasi user
- * GPS dengan fallback ke lokasi manual dari database
+ * Satu Ramadhan - Location Module
+ * Geolocation and user location management handler
+ * GPS with fallback to manual location from database
  */
 
 const SaturaLocation = (function () {

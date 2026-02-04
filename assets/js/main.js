@@ -1,16 +1,61 @@
 /**
- * Satura Ramadhan - Main UI Controller
- * Extracted from index.html for modularity
+ * Satu Ramadhan - Main UI Controller
+ * Handles UI interactions, navigation, and schedule rendering
  */
 
 (function () {
     'use strict';
 
-    // Organization Ramadhan start dates
-    const RAMADHAN_START = {
-        muhammadiyah: new Date(2026, 1, 18), // 18 Feb 2026
-        nu: new Date(2026, 1, 19)            // 19 Feb 2026
-    };
+    // Ramadhan config - loaded from database/ramadhan.json
+    let ramadhanConfig = null;
+
+    /**
+     * Load Ramadhan configuration from external JSON
+     * This allows yearly updates without code changes
+     * @returns {Promise<Object>} - Ramadhan config
+     */
+    async function loadRamadhanConfig() {
+        if (ramadhanConfig) return ramadhanConfig;
+
+        try {
+            const response = await fetch('./database/ramadhan.json');
+            if (!response.ok) throw new Error('Failed to load ramadhan.json');
+
+            const data = await response.json();
+            ramadhanConfig = data;
+            return data;
+        } catch (error) {
+            console.error('[Main] Failed to load Ramadhan config:', error);
+            // Fallback to defaults if JSON fails
+            ramadhanConfig = {
+                tahunHijriah: new Date().getFullYear() + 579, // Approximate Hijri year
+                tahunMasehi: new Date().getFullYear(),
+                tanggalSatuRamadhan: {
+                    muhammadiyah: null,
+                    nu: null
+                }
+            };
+            return ramadhanConfig;
+        }
+    }
+
+    /**
+     * Get Ramadhan start date for organization
+     * @param {string} org - 'muhammadiyah' or 'nu'
+     * @returns {Date|null} - Start date or null if not configured
+     */
+    function getRamadhanStartDate(org) {
+        if (!ramadhanConfig || !ramadhanConfig.tanggalSatuRamadhan) {
+            return null;
+        }
+
+        const dateStr = ramadhanConfig.tanggalSatuRamadhan[org];
+        if (!dateStr) return null;
+
+        // Parse YYYY-MM-DD format
+        const [year, month, day] = dateStr.split('-').map(Number);
+        return new Date(year, month - 1, day); // month is 0-indexed
+    }
 
     // State
     let provincesData = [];
@@ -306,7 +351,8 @@
     // Monthly schedule
     async function loadMonthlySchedule(lat, lng) {
         const org = SaturaStorage.get('organization') || 'nu';
-        const startDate = RAMADHAN_START[org];
+        const startDate = getRamadhanStartDate(org);
+        if (!startDate) return;
 
         try {
             // Ramadhan spans two months (Feb-Mar), need to fetch both
@@ -335,7 +381,8 @@
         if (!tbody) return;
 
         const org = SaturaStorage.get('organization') || 'nu';
-        const startDate = RAMADHAN_START[org];
+        const startDate = getRamadhanStartDate(org);
+        if (!startDate) return;
         const today = new Date();
         const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
@@ -387,7 +434,8 @@
         if (!cardsContainer) return;
 
         const org = SaturaStorage.get('organization') || 'nu';
-        const startDate = RAMADHAN_START[org];
+        const startDate = getRamadhanStartDate(org);
+        if (!startDate) return;
         const today = new Date();
         const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
@@ -691,6 +739,9 @@
 
     // Initialize
     async function init() {
+        // Load Ramadhan configuration first
+        await loadRamadhanConfig();
+
         cacheElements();
         setupNavigation();
         setupMobileMenu();
@@ -698,7 +749,50 @@
         setupScheduleToggle();
         setupBackToTop();
 
-        // Initialize Footer (Author & Socials) - Manual Inline Fix
+        // Update dynamic year elements from Ramadhan config
+        if (ramadhanConfig) {
+            const tahun = ramadhanConfig.tahunHijriah;
+
+            // Hero badge - Hijri year
+            const hijriYear = document.getElementById('hijriYear');
+            if (hijriYear) {
+                hijriYear.textContent = `${tahun} H`;
+            }
+
+            // Schedule title
+            const scheduleTitle = document.getElementById('scheduleTitle');
+            if (scheduleTitle) {
+                scheduleTitle.textContent = `Jadwal Ramadhan ${tahun} H`;
+            }
+
+            // Organization description
+            const orgDesc = document.getElementById('orgDescription');
+            if (orgDesc) {
+                orgDesc.textContent = `Pilih organisasi untuk menentukan awal Ramadhan ${tahun} H`;
+            }
+
+            // Organization start dates
+            const formatDate = (dateStr) => {
+                if (!dateStr) return '';
+                const [year, month, day] = dateStr.split('-').map(Number);
+                const date = new Date(year, month - 1, day);
+                const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                return `${day} ${months[month - 1]} ${year}`;
+            };
+
+            const muhammadiyahDateEl = document.getElementById('muhammadiyahDate');
+            if (muhammadiyahDateEl && ramadhanConfig.tanggalSatuRamadhan?.muhammadiyah) {
+                muhammadiyahDateEl.textContent = `1 Ramadhan = ${formatDate(ramadhanConfig.tanggalSatuRamadhan.muhammadiyah)}`;
+            }
+
+            const nuDateEl = document.getElementById('nuDate');
+            if (nuDateEl && ramadhanConfig.tanggalSatuRamadhan?.nu) {
+                nuDateEl.textContent = `1 Ramadhan = ${formatDate(ramadhanConfig.tanggalSatuRamadhan.nu)}`;
+            }
+        }
+
+        // Initialize footer with author info and social links
         try {
             const author = SaturaConfig.AUTHOR;
             const year = new Date().getFullYear();
@@ -773,8 +867,6 @@
                 // Pre-fetch tomorrow's schedule
                 await fetchTomorrowSchedule(currentLoc.latitude, currentLoc.longitude);
             }
-
-            console.log('Satu Ramadhan initialized');
         } catch (err) {
             console.error('Init failed:', err);
         }

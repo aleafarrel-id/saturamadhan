@@ -1,7 +1,7 @@
 /**
- * Satura Ramadhan - Storage Module
- * Centralized storage management untuk localStorage dan data persistence
- * Wrapper untuk localStorage dengan error handling dan expiration
+ * Satu Ramadhan - Storage Module
+ * Centralized storage management for localStorage and data persistence
+ * LocalStorage wrapper with error handling and expiration
  */
 
 const SaturaStorage = (function () {

@@ -1,7 +1,7 @@
 /**
- * Satura Ramadhan - Main Application
- * Entry point dan koordinator untuk semua module
- * Backend logic tanpa UI (frontend akan ditambahkan nanti)
+ * Satu Ramadhan - Main Application
+ * Entry point and coordinator for all modules
+ * Backend logic without UI
  */
 
 const SaturaApp = (function () {
@@ -36,7 +36,7 @@ const SaturaApp = (function () {
             return getStatus();
         }
 
-        SaturaConfig.log('Initializing Satura Ramadhan...');
+        SaturaConfig.log('Initializing Satu Ramadhan...');
 
         try {
             // OPTIMIZATION: Parallel initialization for non-dependent tasks

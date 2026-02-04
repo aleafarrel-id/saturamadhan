@@ -1,10 +1,10 @@
 /**
- * Satura Ramadhan - Service Worker
- * PWA offline support dengan caching strategy
+ * Satu Ramadhan - Service Worker
+ * PWA offline support with caching strategy
  * Network-first for JS to ensure users get latest code
  */
 
-const CACHE_VERSION = 'v17';
+const CACHE_VERSION = 'v19';
 
 const CACHE_NAMES = {
     static: `satura-static-${CACHE_VERSION}`,
@@ -74,7 +74,8 @@ const JS_FILES_PATTERN = /\.js$/;
 // Database files to cache
 const DATABASE_ASSETS = [
     './database/province.json',
-    './database/regency.json'
+    './database/regency.json',
+    './database/ramadhan.json'
 ];
 
 // API domains to cache
@@ -379,7 +380,7 @@ self.addEventListener('push', (event) => {
     };
 
     event.waitUntil(
-        self.registration.showNotification(data.title || 'Satura Ramadhan', options)
+        self.registration.showNotification(data.title || 'Satu Ramadhan', options)
     );
 });
 

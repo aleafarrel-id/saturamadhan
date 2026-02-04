@@ -1,7 +1,6 @@
 /**
- * Satura Ramadhan - Configuration Module
- * Semua konfigurasi aplikasi dalam satu file
- * Tidak ada hardcode - semua menggunakan variable
+ * Satu Ramadhan - Configuration Module
+ * Application configuration in a single file
  */
 
 const SaturaConfig = (function () {
@@ -151,7 +150,8 @@ const SaturaConfig = (function () {
         // Path ke file database (relatif dari root)
         paths: {
             provinces: './database/province.json',
-            regencies: './database/regency.json'
+            regencies: './database/regency.json',
+            ramadhan: './database/ramadhan.json'
         },
 
         // Field names dalam database

@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary SEO -->
-    <title>Satu Ramadhan - Jadwal Sholat & Imsak Ramadhan 1447 H / 2026</title>
+    <title>Satu Ramadhan - Jadwal Sholat & Imsak Ramadhan Indonesia</title>
     <meta name="description"
-        content="Aplikasi jadwal sholat, imsak, dan buka puasa Ramadhan 1447 H / 2026 yang akurat berdasarkan lokasi GPS. Metode perhitungan Kementerian Agama RI.">
+        content="Aplikasi jadwal sholat, imsak, dan buka puasa Ramadhan yang akurat berdasarkan lokasi GPS. Metode perhitungan Kementerian Agama RI.">
     <meta name="keywords"
-        content="jadwal sholat, imsak, buka puasa, ramadhan 2026, 1447 H, waktu sholat, jadwal imsakiyah, indonesia, kemenag, muhammadiyah, nu">
+        content="jadwal sholat, imsak, buka puasa, ramadhan, waktu sholat, jadwal imsakiyah, indonesia, kemenag, muhammadiyah, nu">
     <meta name="author" content="Alea Farrel">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow">
@@ -19,7 +19,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://saturamadhan.id/">
-    <meta property="og:title" content="Satu Ramadhan - Jadwal Sholat & Imsak Ramadhan 2026">
+    <meta property="og:title" content="Satu Ramadhan - Jadwal Sholat & Imsak Ramadhan">
     <meta property="og:description"
         content="Aplikasi jadwal sholat dan imsak Ramadhan yang akurat berdasarkan lokasi GPS dengan metode Kemenag RI.">
     <meta property="og:image" content="assets/favicon/favicon.png">
@@ -121,7 +121,7 @@
                             </div>
                             <div id="heroBadge" class="hero__badge">
                                 <span id="hijriMonth">Ramadhan</span><br>
-                                <span id="hijriYear">1447 H</span>
+                                <span id="hijriYear"></span>
                             </div>
                         </div>
 
@@ -224,7 +224,7 @@
                 <div class="section--compact schedule">
                     <div class="container">
                         <div class="schedule__header">
-                            <h2 class="schedule__title">Jadwal Ramadhan 1447 H</h2>
+                            <h2 class="schedule__title" id="scheduleTitle">Jadwal Ramadhan</h2>
                             <button id="toggleSchedule" class="schedule__toggle">
                                 <span>Lihat Jadwal Lengkap</span>
                                 <i class='bx bx-chevron-down'></i>
@@ -283,21 +283,22 @@
                                 <i class='bx bx-building-house'></i>
                                 Organisasi
                             </h3>
-                            <p class="settings__section-desc">Pilih organisasi untuk menentukan awal Ramadhan 1447 H</p>
+                            <p class="settings__section-desc" id="orgDescription">Pilih organisasi untuk menentukan awal
+                                Ramadhan</p>
 
                             <div class="settings__options" id="organizationOptions">
                                 <label class="settings__option">
                                     <input type="radio" name="organization" value="muhammadiyah">
                                     <span class="settings__option-card">
                                         <span class="settings__option-title">Muhammadiyah</span>
-                                        <span class="settings__option-desc">1 Ramadhan = 18 Februari 2026</span>
+                                        <span class="settings__option-desc" id="muhammadiyahDate"></span>
                                     </span>
                                 </label>
                                 <label class="settings__option">
                                     <input type="radio" name="organization" value="nu" checked>
                                     <span class="settings__option-card">
                                         <span class="settings__option-title">Nahdlatul Ulama</span>
-                                        <span class="settings__option-desc">1 Ramadhan = 19 Februari 2026</span>
+                                        <span class="settings__option-desc" id="nuDate"></span>
                                     </span>
                                 </label>
                             </div>

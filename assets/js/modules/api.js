@@ -1,7 +1,7 @@
 /**
- * Satura Ramadhan - API Module
- * Handler untuk Aladhan API dengan sistem fallback
- * Mendukung multiple endpoints dengan auto-failover
+ * Satu Ramadhan - API Module
+ * Aladhan API handler with fallback system
+ * Supports multiple endpoints with auto-failover
  */
 
 const SaturaAPI = (function () {

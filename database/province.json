@@ -193,27 +193,9 @@
   },
   {
     "id": "91",
-    "name": "Papua Tengah",
-    "latitude": -3.7372291072755495,
-    "longitude": 136.50387650362026
-  },
-  {
-    "id": "91",
-    "name": "Papua Selatan",
-    "latitude": -6.7476060615043,
-    "longitude": 139.01052491558784
-  },
-  {
-    "id": "91",
     "name": "Papua",
     "latitude": -2.4297338679853695,
     "longitude": 137.7154479192503
-  },
-  {
-    "id": "91",
-    "name": "Papua Pegunungan",
-    "latitude": -4.0112076560110905,
-    "longitude": 139.2460088285345
   },
   {
     "id": "92",
@@ -222,7 +204,25 @@
     "longitude": 133.7153426127319
   },
   {
-    "id": "92",
+    "id": "93",
+    "name": "Papua Selatan",
+    "latitude": -6.7476060615043,
+    "longitude": 139.01052491558784
+  },
+  {
+    "id": "94",
+    "name": "Papua Tengah",
+    "latitude": -3.7372291072755495,
+    "longitude": 136.50387650362026
+  },
+  {
+    "id": "95",
+    "name": "Papua Pegunungan",
+    "latitude": -4.0112076560110905,
+    "longitude": 139.2460088285345
+  },
+  {
+    "id": "96",
     "name": "Papua Barat Daya",
     "latitude": -0.9824401527322694,
     "longitude": 131.1652448565146

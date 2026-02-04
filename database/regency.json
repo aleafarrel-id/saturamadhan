@@ -3306,14 +3306,14 @@
   },
   {
     "id": "9101",
-    "province_id": "91",
+    "province_id": "93",
     "name": "Merauke",
     "latitude": -7.776648061357973,
     "longitude": 139.31909054353707
   },
   {
     "id": "9102",
-    "province_id": "91",
+    "province_id": "95",
     "name": "Jayawijaya",
     "latitude": -4.113245418474958,
     "longitude": 138.85735479602505
@@ -3327,7 +3327,7 @@
   },
   {
     "id": "9104",
-    "province_id": "91",
+    "province_id": "94",
     "name": "Nabire",
     "latitude": -3.334919262754854,
     "longitude": 135.47370927579422
@@ -3348,21 +3348,21 @@
   },
   {
     "id": "9107",
-    "province_id": "91",
+    "province_id": "94",
     "name": "Puncak Jaya",
     "latitude": -3.515314520833286,
     "longitude": 137.9450399270834
   },
   {
     "id": "9108",
-    "province_id": "91",
+    "province_id": "94",
     "name": "Paniai",
     "latitude": -3.8088157516499552,
     "longitude": 136.56407548873338
   },
   {
     "id": "9109",
-    "province_id": "91",
+    "province_id": "94",
     "name": "Mimika",
     "latitude": -4.457536205265579,
     "longitude": 136.67593618118752
@@ -3383,21 +3383,21 @@
   },
   {
     "id": "9112",
-    "province_id": "91",
+    "province_id": "95",
     "name": "Pegunungan Bintang",
     "latitude": -4.275286765609708,
     "longitude": 140.38791679152445
   },
   {
     "id": "9113",
-    "province_id": "91",
+    "province_id": "95",
     "name": "Yahukimo",
     "latitude": -4.463135137079954,
     "longitude": 139.5570713200201
   },
   {
     "id": "9114",
-    "province_id": "91",
+    "province_id": "95",
     "name": "Tolikara",
     "latitude": -3.3398688927272278,
     "longitude": 138.4344370430364
@@ -3411,21 +3411,21 @@
   },
   {
     "id": "9116",
-    "province_id": "91",
+    "province_id": "93",
     "name": "Boven Digoel",
     "latitude": -6.240796596597358,
     "longitude": 140.30727960681824
   },
   {
     "id": "9117",
-    "province_id": "91",
+    "province_id": "93",
     "name": "Mappi",
     "latitude": -6.565978500333288,
     "longitude": 139.20360717404952
   },
   {
     "id": "9118",
-    "province_id": "91",
+    "province_id": "93",
     "name": "Asmat",
     "latitude": -5.229576208542506,
     "longitude": 138.61044610167025
@@ -3446,56 +3446,56 @@
   },
   {
     "id": "9121",
-    "province_id": "91",
+    "province_id": "95",
     "name": "Mamberamo Tengah",
     "latitude": -3.5745816091956057,
     "longitude": 138.9947895895218
   },
   {
     "id": "9122",
-    "province_id": "91",
+    "province_id": "95",
     "name": "Yalimo",
     "latitude": -3.8091743514666176,
     "longitude": 139.51074688065006
   },
   {
     "id": "9123",
-    "province_id": "91",
+    "province_id": "95",
     "name": "Lanny Jaya",
     "latitude": -3.9760477497631093,
     "longitude": 138.36381480244742
   },
   {
     "id": "9124",
-    "province_id": "91",
+    "province_id": "95",
     "name": "Nduga",
     "latitude": -4.4285585314931035,
     "longitude": 138.38755705216445
   },
   {
     "id": "9125",
-    "province_id": "91",
+    "province_id": "94",
     "name": "Puncak",
     "latitude": -3.635335654730289,
     "longitude": 137.4174525576855
   },
   {
     "id": "9126",
-    "province_id": "91",
+    "province_id": "94",
     "name": "Dogiyai",
     "latitude": -4.043778579340376,
     "longitude": 135.6002604612341
   },
   {
     "id": "9127",
-    "province_id": "91",
+    "province_id": "94",
     "name": "Intan Jaya",
     "latitude": -3.487865437011448,
     "longitude": 136.85877062108054
   },
   {
     "id": "9128",
-    "province_id": "91",
+    "province_id": "94",
     "name": "Deiyai",
     "latitude": -4.214614135270788,
     "longitude": 136.44637952487503
@@ -3509,7 +3509,7 @@
   },
   {
     "id": "9201",
-    "province_id": "92",
+    "province_id": "96",
     "name": "Sorong",
     "latitude": -1.1962632214174287,
     "longitude": 131.4881275819806
@@ -3530,14 +3530,14 @@
   },
   {
     "id": "9204",
-    "province_id": "92",
+    "province_id": "96",
     "name": "Sorong Selatan",
     "latitude": -1.6857264990677472,
     "longitude": 132.15538624833906
   },
   {
     "id": "9205",
-    "province_id": "92",
+    "province_id": "96",
     "name": "Raja Ampat",
     "latitude": -0.7677097165591631,
     "longitude": 130.5311502999212
@@ -3565,14 +3565,14 @@
   },
   {
     "id": "9209",
-    "province_id": "92",
+    "province_id": "96",
     "name": "Tambrauw",
     "latitude": -0.819077236656673,
     "longitude": 132.67844189610457
   },
   {
     "id": "9210",
-    "province_id": "92",
+    "province_id": "96",
     "name": "Maybrat",
     "latitude": -1.4061838253957848,
     "longitude": 132.50684493989593
@@ -3593,7 +3593,7 @@
   },
   {
     "id": "9271",
-    "province_id": "92",
+    "province_id": "96",
     "name": "Kota Sorong",
     "latitude": -0.8665977658888488,
     "longitude": 131.33041308677784
