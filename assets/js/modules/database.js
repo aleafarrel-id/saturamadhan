@@ -28,9 +28,7 @@ const SaturaDatabase = (function () {
 
         try {
             SaturaConfig.log('Loading provinces database...');
-            // Add cache-busting to ensure fresh data
-            const cacheBuster = `?v=${Date.now()}`;
-            const response = await fetch(SaturaConfig.DATABASE.paths.provinces + cacheBuster);
+            const response = await fetch(SaturaConfig.DATABASE.paths.provinces);
 
             if (!response.ok) {
                 throw new Error(`Failed to load provinces: ${response.status}`);
@@ -57,9 +55,7 @@ const SaturaDatabase = (function () {
 
         try {
             SaturaConfig.log('Loading regencies database...');
-            // Add cache-busting to ensure fresh data
-            const cacheBuster = `?v=${Date.now()}`;
-            const response = await fetch(SaturaConfig.DATABASE.paths.regencies + cacheBuster);
+            const response = await fetch(SaturaConfig.DATABASE.paths.regencies);
 
             if (!response.ok) {
                 throw new Error(`Failed to load regencies: ${response.status}`);

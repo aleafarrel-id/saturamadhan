@@ -178,7 +178,7 @@
      * Wait for app initialization
      */
     function waitForAppReady() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             updateProgress(85, 'Menyiapkan data...');
 
             // Check if SaturaApp exists and has the on method
@@ -190,6 +190,13 @@
 
                 SaturaApp.on('onPrayerTimesFetched', () => {
                     updateProgress(95, 'Hampir selesai...');
+                });
+
+                // Fail gracefully
+                SaturaApp.on('onError', (err) => {
+                    console.error('[Loader] App reported error:', err);
+                    updateProgress(100, 'Memuat dengan peringatan...');
+                    setTimeout(() => reject(err), 500);
                 });
             } else {
                 // Fallback if SaturaApp is not ready
