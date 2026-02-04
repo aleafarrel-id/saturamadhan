@@ -26,9 +26,21 @@
             return data;
         } catch (error) {
             console.error('[Main] Failed to load Ramadhan config:', error);
-            // Fallback to defaults if JSON fails
+
+            // Fallback: Get accurate Hijri year from Aladhan API
+            let hijriYear = new Date().getFullYear() + 579; // Last resort fallback
+
+            try {
+                const hijriData = await SaturaAPI.gregorianToHijri(new Date());
+                if (hijriData && hijriData.hijri && hijriData.hijri.year) {
+                    hijriYear = parseInt(hijriData.hijri.year);
+                }
+            } catch (apiError) {
+                console.error('[Main] Failed to get Hijri year from API:', apiError);
+            }
+
             ramadhanConfig = {
-                tahunHijriah: new Date().getFullYear() + 579, // Approximate Hijri year
+                tahunHijriah: hijriYear,
                 tahunMasehi: new Date().getFullYear(),
                 tanggalSatuRamadhan: {
                     muhammadiyah: null,
