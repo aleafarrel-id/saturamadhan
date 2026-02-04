@@ -158,11 +158,45 @@
     padding: var(--sp-3) var(--sp-2);
     text-align: center;
     transition: all var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-1);
+}
+
+.prayer-time-item__icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: var(--sp-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prayer-time-item__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(88%) sepia(6%) saturate(600%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    transition: all var(--transition-fast);
+}
+
+.prayer-time-item__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .prayer-time-item.is-next {
     background: rgba(212, 175, 55, 0.15);
     border-color: var(--clr-accent-500);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+.prayer-time-item.is-next .prayer-time-item__icon img {
+    filter: brightness(0) saturate(100%) invert(75%) sepia(34%) saturate(723%) hue-rotate(1deg) brightness(98%) contrast(88%);
 }
 
 .prayer-time-item__name {
@@ -174,10 +208,38 @@
 .prayer-time-item__time {
     font-size: var(--fs-md);
     font-weight: var(--fw-bold);
+    font-weight: var(--fw-bold);
     color: var(--clr-text-primary);
 }
 
-.prayer-time-item.is-next .prayer-time-item__time {
+/* Highlight Imsak on Desktop Grid */
+.prayer-time-item:first-child .prayer-time-item__icon img {
+    filter: brightness(0) saturate(100%) invert(56%) sepia(68%) saturate(309%) hue-rotate(129deg) brightness(91%) contrast(87%);
+}
+
+.prayer-time-item:first-child .prayer-time-item__name,
+.prayer-time-item:first-child .prayer-time-item__time {
+    color: var(--clr-primary-400);
+    font-weight: var(--fw-semibold);
+}
+
+/* Force Imsak to keep Teal highlight even when active/next */
+.prayer-time-item.is-next:first-child {
+    background: rgba(45, 158, 158, 0.1);
+    border-color: var(--clr-primary-400);
+    box-shadow: 0 0 15px rgba(45, 158, 158, 0.25);
+}
+
+.prayer-time-item.is-next:first-child .prayer-time-item__icon img {
+    filter: brightness(0) saturate(100%) invert(56%) sepia(68%) saturate(309%) hue-rotate(129deg) brightness(91%) contrast(87%);
+}
+
+.prayer-time-item.is-next:first-child .prayer-time-item__time {
+    color: var(--clr-primary-400);
+}
+
+/* Other items use Accent color when next */
+.prayer-time-item.is-next:not(:first-child) .prayer-time-item__time {
     color: var(--clr-accent-500);
 }
 
@@ -201,21 +263,56 @@
 
     .prayer-time-item {
         display: flex;
-        justify-content: space-between;
+        flex-direction: row;
         align-items: center;
+        gap: var(--sp-3);
         padding: var(--sp-3) var(--sp-4);
         border-radius: 0;
         border: none;
         border-bottom: 1px solid var(--clr-border-light);
         background: transparent;
+        text-align: left;
     }
 
     .prayer-time-item:last-child {
         border-bottom: none;
     }
 
+    .prayer-time-item__icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .prayer-time-item__icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: brightness(0) saturate(100%) invert(88%) sepia(6%) saturate(600%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        transition: none;
+    }
+
+    .prayer-time-item__content {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .prayer-time-item.is-next {
         background: rgba(212, 175, 55, 0.15);
+        transform: none;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .prayer-time-item.is-next .prayer-time-item__icon img {
+        filter: brightness(0) saturate(100%) invert(75%) sepia(34%) saturate(723%) hue-rotate(1deg) brightness(98%) contrast(88%);
     }
 
     .prayer-time-item.is-next .prayer-time-item__name,
@@ -227,6 +324,26 @@
         font-size: var(--fs-sm);
         margin-bottom: 0;
         color: var(--clr-text-secondary);
+    }
+
+    /* Highlight Imsak on Mobile Grid */
+    .prayer-time-item:first-child {
+        background: rgba(45, 158, 158, 0.1);
+        border: 1px solid rgba(45, 158, 158, 0.3);
+        border-radius: var(--radius-md);
+        margin: var(--sp-2);
+        margin: var(--sp-2);
+        width: auto;
+    }
+
+    .prayer-time-item:first-child .prayer-time-item__name,
+    .prayer-time-item:first-child .prayer-time-item__time {
+        color: var(--clr-primary-400);
+        font-weight: var(--fw-semibold);
+    }
+
+    .prayer-time-item:first-child .prayer-time-item__icon img {
+        filter: brightness(0) saturate(100%) invert(56%) sepia(68%) saturate(309%) hue-rotate(129deg) brightness(91%) contrast(87%);
     }
 
     .prayer-time-item__time {
@@ -259,10 +376,8 @@
 .schedule__cards,
 .schedule__cards-mobile {
     display: none;
-    /* Hidden by default on desktop */
 }
 
-/* Scroll hint - hidden by default on desktop */
 .schedule__scroll-hint {
     display: none;
 }
@@ -291,7 +406,8 @@
 
     .schedule__cards-mobile .schedule-card {
         flex: 0 0 calc(100% - var(--sp-2));
-        scroll-snap-align: start;
+        scroll-snap-align: center;
+        max-width: 400px;
     }
 
     /* Hide desktop-only toggle on mobile when showing cards */
@@ -332,11 +448,12 @@
     border: 1px solid var(--clr-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
+    transition: transform var(--transition-fast);
 }
 
 .schedule-card.is-today {
     border-color: var(--clr-accent-500);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
 }
 
 .schedule-card__header {
@@ -348,81 +465,98 @@
     border-bottom: 1px solid var(--clr-border-light);
 }
 
+.schedule-card__header-content {
+    display: flex;
+    flex-direction: column;
+}
+
 .schedule-card__day {
-    font-size: var(--fs-lg);
+    font-size: var(--fs-md);
     font-weight: var(--fw-bold);
     color: var(--clr-accent-500);
 }
 
 .schedule-card__date {
-    font-size: var(--fs-sm);
-    color: var(--clr-text-primary);
-}
-
-.schedule-card.is-today .schedule-card__header {
-    background: rgba(212, 175, 55, 0.15);
-}
-
-.schedule-card.is-today .schedule-card__day::after {
-    content: ' • Hari Ini';
     font-size: var(--fs-xs);
-    color: var(--clr-accent-400);
-    font-weight: var(--fw-medium);
+    color: var(--clr-text-secondary);
+    margin-top: 2px;
+}
+
+.schedule-card__badge {
+    font-size: 10px;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--clr-accent-500);
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .schedule-card__body {
-    padding: 0;
+    padding: var(--sp-3);
 }
 
-.schedule-card__row {
+.schedule-card__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-2);
+}
+
+.schedule-time-box {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    padding: var(--sp-2) var(--sp-4);
-    border-bottom: 1px solid var(--clr-border-light);
+    justify-content: space-between;
+    background: var(--clr-bg-surface);
+    border: 1px solid var(--clr-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--sp-2) var(--sp-3);
+    text-align: left;
 }
 
-.schedule-card__row:last-child {
-    border-bottom: none;
+.schedule-time-box--maghrib {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
 }
 
-.schedule-card__row:nth-child(odd) {
-    background: var(--clr-bg-table-row-odd);
+.schedule-time-box--imsak {
+    border-color: var(--clr-border-light);
+    background: rgba(15, 76, 92, 0.05);
 }
 
-.schedule-card__row:nth-child(even) {
-    background: var(--clr-bg-table-row-even);
-}
-
-.schedule-card__label {
+.schedule-time-box__label {
     font-size: var(--fs-sm);
+    text-transform: capitalize;
     color: var(--clr-text-secondary);
+    margin-bottom: 0;
 }
 
-.schedule-card__value {
+.schedule-time-box__value {
     font-size: var(--fs-md);
     font-weight: var(--fw-semibold);
     color: var(--clr-text-primary);
 }
 
-/* Special highlight for Imsak and Maghrib */
-.schedule-card__row--imsak .schedule-card__label,
-.schedule-card__row--imsak .schedule-card__value {
+/* Specific styles overrides */
+.schedule-time-box--maghrib .schedule-time-box__label {
+    font-weight: var(--fw-bold);
+    color: var(--clr-accent-500);
+}
+
+.schedule-time-box--maghrib .schedule-time-box__value {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+    color: var(--clr-accent-500);
+}
+
+.schedule-time-box--imsak .schedule-time-box__value {
     color: var(--clr-primary-400);
 }
 
-.schedule-card__row--maghrib .schedule-card__label,
-.schedule-card__row--maghrib .schedule-card__value {
-    color: var(--clr-accent-500);
-    font-weight: var(--fw-bold);
-}
-
 @media (max-width: 480px) {
-    .schedule-card__header {
-        padding: var(--sp-2) var(--sp-3);
-    }
-
-    .schedule-card__row {
-        padding: var(--sp-2) var(--sp-3);
+    .schedule__cards-mobile .schedule-card {
+        flex: 0 0 85%;
+        max-width: none;
     }
 }

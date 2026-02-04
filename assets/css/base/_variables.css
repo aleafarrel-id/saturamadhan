@@ -41,8 +41,8 @@
 
     /* === Text Colors === */
     --clr-text-primary: #ffffff;
-    --clr-text-secondary: #b8c5d0;
-    --clr-text-muted: #7a8a9a;
+    --clr-text-secondary: #d0e0f0;
+    --clr-text-muted: #a0b0c0;
     --clr-text-dark: #1a2a3a;
     --clr-text-accent: var(--clr-accent-500);
 

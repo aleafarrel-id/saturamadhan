@@ -475,37 +475,42 @@
             html += `
                 <div class="schedule-card ${isToday ? 'is-today' : ''}">
                     <div class="schedule-card__header">
-                        <span class="schedule-card__day">Hari ${ramadhanDay}</span>
-                        <span class="schedule-card__date">${dateStr}</span>
+                        <div class="schedule-card__header-content">
+                            <span class="schedule-card__day">Hari ${ramadhanDay}</span>
+                            <span class="schedule-card__date">${dateStr}</span>
+                        </div>
+                        ${isToday ? '<span class="schedule-card__badge">Hari Ini</span>' : ''}
                     </div>
                     <div class="schedule-card__body">
-                        <div class="schedule-card__row schedule-card__row--imsak">
-                            <span class="schedule-card__label">Imsak</span>
-                            <span class="schedule-card__value">${formatTime(timings.Imsak)}</span>
-                        </div>
-                        <div class="schedule-card__row">
-                            <span class="schedule-card__label">Subuh</span>
-                            <span class="schedule-card__value">${formatTime(timings.Fajr)}</span>
-                        </div>
-                        <div class="schedule-card__row">
-                            <span class="schedule-card__label">Terbit</span>
-                            <span class="schedule-card__value">${formatTime(timings.Sunrise)}</span>
-                        </div>
-                        <div class="schedule-card__row">
-                            <span class="schedule-card__label">Dzuhur</span>
-                            <span class="schedule-card__value">${formatTime(timings.Dhuhr)}</span>
-                        </div>
-                        <div class="schedule-card__row">
-                            <span class="schedule-card__label">Ashar</span>
-                            <span class="schedule-card__value">${formatTime(timings.Asr)}</span>
-                        </div>
-                        <div class="schedule-card__row schedule-card__row--maghrib">
-                            <span class="schedule-card__label">Maghrib</span>
-                            <span class="schedule-card__value">${formatTime(timings.Maghrib)}</span>
-                        </div>
-                        <div class="schedule-card__row">
-                            <span class="schedule-card__label">Isya</span>
-                            <span class="schedule-card__value">${formatTime(timings.Isha)}</span>
+                        <div class="schedule-card__grid">
+                            <div class="schedule-time-box schedule-time-box--imsak">
+                                <span class="schedule-time-box__label">Imsak</span>
+                                <span class="schedule-time-box__value">${formatTime(timings.Imsak)}</span>
+                            </div>
+                            <div class="schedule-time-box">
+                                <span class="schedule-time-box__label">Subuh</span>
+                                <span class="schedule-time-box__value">${formatTime(timings.Fajr)}</span>
+                            </div>
+                            <div class="schedule-time-box">
+                                <span class="schedule-time-box__label">Terbit</span>
+                                <span class="schedule-time-box__value">${formatTime(timings.Sunrise)}</span>
+                            </div>
+                            <div class="schedule-time-box">
+                                <span class="schedule-time-box__label">Dzuhur</span>
+                                <span class="schedule-time-box__value">${formatTime(timings.Dhuhr)}</span>
+                            </div>
+                            <div class="schedule-time-box">
+                                <span class="schedule-time-box__label">Ashar</span>
+                                <span class="schedule-time-box__value">${formatTime(timings.Asr)}</span>
+                            </div>
+                            <div class="schedule-time-box schedule-time-box--maghrib">
+                                <span class="schedule-time-box__label">Maghrib</span>
+                                <span class="schedule-time-box__value">${formatTime(timings.Maghrib)}</span>
+                            </div>
+                            <div class="schedule-time-box">
+                                <span class="schedule-time-box__label">Isya</span>
+                                <span class="schedule-time-box__value">${formatTime(timings.Isha)}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -549,12 +554,31 @@
 
         const nextPrayer = SaturaApp.getNextPrayer();
 
-        grid.innerHTML = times.map(prayer => `
+        // Icon Mapping
+        const iconMap = {
+            'imsak': 'moon-stars.svg',
+            'fajr': 'sun-fog.svg',
+            'sunrise': 'sun-rise.svg',
+            'dhuhr': 'sun.svg',
+            'asr': 'cloud-sun.svg',
+            'maghrib': 'sun-set.svg',
+            'isha': 'moon.svg'
+        };
+
+        grid.innerHTML = times.map(prayer => {
+            const iconFile = iconMap[prayer.key] || 'sun.svg';
+
+            return `
             <div class="prayer-time-item ${nextPrayer?.key === prayer.key ? 'is-next' : ''}">
-                <div class="prayer-time-item__name">${prayer.name}</div>
-                <div class="prayer-time-item__time">${prayer.time || '--:--'}</div>
+                <div class="prayer-time-item__icon">
+                    <img src="assets/icon/${iconFile}" alt="${prayer.name}" loading="lazy">
+                </div>
+                <div class="prayer-time-item__content">
+                    <div class="prayer-time-item__name">${prayer.name}</div>
+                    <div class="prayer-time-item__time">${prayer.time || '--:--'}</div>
+                </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     function updateHeroDate(dateInfo) {

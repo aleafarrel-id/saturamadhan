@@ -4,7 +4,7 @@
  * Network-first for JS to ensure users get latest code
  */
 
-const CACHE_VERSION = 'v20';
+const CACHE_VERSION = 'v21';
 
 const CACHE_NAMES = {
     static: `satura-static-${CACHE_VERSION}`,
@@ -38,6 +38,15 @@ const STATIC_ASSETS = [
     '/saturamadhan/assets/css/components/_footer.css',
     '/saturamadhan/assets/css/components/_animations.css',
     '/saturamadhan/assets/css/components/_settings.css',
+
+    // Icons - Prayer Times
+    '/saturamadhan/assets/icon/cloud-sun.svg',
+    '/saturamadhan/assets/icon/moon-stars.svg',
+    '/saturamadhan/assets/icon/moon.svg',
+    '/saturamadhan/assets/icon/sun-fog.svg',
+    '/saturamadhan/assets/icon/sun-rise.svg',
+    '/saturamadhan/assets/icon/sun-set.svg',
+    '/saturamadhan/assets/icon/sun.svg',
 
     // Fonts - Poppins
     '/saturamadhan/assets/font/poppins/Poppins-Light.ttf',
