@@ -788,10 +788,30 @@
     function setupPWAInstall() {
         let deferredPrompt;
         const footerInstallBtn = document.getElementById('footerInstallBtn');
+        // Get the specific container based on HTML structure
+        const installContainer = footerInstallBtn ? footerInstallBtn.closest('.footer__install') : null;
+
+        // Hide by default
+        if (installContainer) {
+            installContainer.classList.add('hidden');
+            installContainer.style.display = 'none';
+            if (installContainer.parentElement) {
+                installContainer.parentElement.classList.add('footer__content--no-install');
+            }
+        }
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
+
+            // Show the button when browser is ready to install
+            if (installContainer) {
+                installContainer.classList.remove('hidden');
+                installContainer.style.display = ''; // Reset inline style
+                if (installContainer.parentElement) {
+                    installContainer.parentElement.classList.remove('footer__content--no-install');
+                }
+            }
         });
 
         if (footerInstallBtn) {
@@ -801,14 +821,28 @@
                     const { outcome } = await deferredPrompt.userChoice;
                     console.log(`User response to the install prompt: ${outcome}`);
                     deferredPrompt = null;
-                } else {
-                    showNotification('Aplikasi sudah terpasang atau browser tidak mendukung.', 'info');
+
+                    // Hide immediately if accepted, although appinstalled will also fire
+                    if (outcome === 'accepted' && installContainer) {
+                        installContainer.classList.add('hidden');
+                        installContainer.style.display = 'none';
+                        if (installContainer.parentElement) {
+                            installContainer.parentElement.classList.add('footer__content--no-install');
+                        }
+                    }
                 }
             });
         }
 
         window.addEventListener('appinstalled', () => {
             deferredPrompt = null;
+            if (installContainer) {
+                installContainer.classList.add('hidden');
+                installContainer.style.display = 'none';
+                if (installContainer.parentElement) {
+                    installContainer.parentElement.classList.add('footer__content--no-install');
+                }
+            }
             showNotification('Aplikasi berhasil dipasang!', 'success');
         });
     }

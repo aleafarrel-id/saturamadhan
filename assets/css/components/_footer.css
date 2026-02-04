@@ -16,6 +16,10 @@
     margin-bottom: var(--sp-6);
 }
 
+.footer__content--no-install {
+    grid-template-columns: 1.5fr 0.7fr 0.7fr;
+}
+
 .footer__brand {
     max-width: 300px;
 }
