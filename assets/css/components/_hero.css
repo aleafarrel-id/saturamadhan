@@ -1,0 +1,70 @@
+/**
+ * Hero Component - Clean (No ornaments/animations)
+ */
+
+.hero {
+    position: relative;
+    padding: var(--sp-6) 0 var(--sp-4);
+}
+
+.hero__container {
+    position: relative;
+}
+
+.hero__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--sp-3);
+}
+
+.hero__text {
+    flex: 1;
+}
+
+.hero__title {
+    font-family: var(--ff-decorative);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text-primary);
+    margin-bottom: var(--sp-1);
+}
+
+.hero__subtitle {
+    font-family: var(--ff-decorative);
+    font-size: var(--fs-lg);
+    color: var(--clr-accent-500);
+    font-style: italic;
+}
+
+.hero__badge {
+    font-family: var(--ff-decorative);
+    font-size: var(--fs-xl);
+    font-style: italic;
+    color: var(--clr-text-primary);
+    text-align: right;
+    line-height: var(--lh-tight);
+}
+
+.prayer-times-title {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--clr-text-primary);
+    margin: var(--sp-6) 0;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: var(--sp-4) 0;
+    }
+
+    .hero__content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--sp-2);
+    }
+
+    .hero__badge {
+        text-align: center;
+    }
+}

@@ -1,0 +1,149 @@
+/* Skeleton Loading Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.skeleton {
+    background: var(--clr-bg-card);
+    /* High contrast shimmer for visibility */
+    background: linear-gradient(to right,
+            var(--clr-bg-card) 0%,
+            rgba(255, 255, 255, 0.15) 50%,
+            var(--clr-bg-card) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+}
+
+/* Skeleton Layout Helpers */
+.skeleton-box {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Countdown Skeleton Specifics */
+.skeleton-countdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-4);
+    background: var(--clr-bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--clr-border);
+    width: 100%;
+    height: 100%;
+    /* Match container */
+}
+
+.skeleton-countdown-title {
+    width: 120px;
+    height: 32px;
+    border-radius: var(--radius-md);
+}
+
+.skeleton-countdown-timer {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+.skeleton-timer-box {
+    width: 50px;
+    /* Min width from countdown css */
+    height: 60px;
+    /* Approx height based on font size + padding */
+    border-radius: var(--radius-md);
+    background: var(--clr-secondary-600);
+    /* Match timer bg */
+}
+
+/* Prayer Times Grid Skeleton */
+.skeleton-prayer-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--sp-2);
+    margin-top: var(--sp-4);
+}
+
+.skeleton-prayer-card {
+    background: var(--clr-bg-card);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    padding: var(--sp-3) var(--sp-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-1);
+    min-height: 80px;
+    /* Approx height */
+}
+
+.skeleton-prayer-name {
+    width: 60%;
+    height: 12px;
+    margin-bottom: 4px;
+    opacity: 0.6;
+}
+
+.skeleton-prayer-time {
+    width: 80%;
+    height: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .skeleton-countdown {
+        flex-direction: column;
+        gap: var(--sp-3);
+        padding: var(--sp-4);
+    }
+
+    .skeleton-prayer-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+        background: var(--clr-bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--clr-border);
+        overflow: hidden;
+        margin-top: var(--sp-3);
+    }
+
+    .skeleton-prayer-card {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--sp-3) var(--sp-4);
+        border: none;
+        border-bottom: 1px solid var(--clr-border-light);
+        border-radius: 0;
+        min-height: auto;
+    }
+
+    .skeleton-prayer-card:last-child {
+        border-bottom: none;
+    }
+
+    .skeleton-prayer-name {
+        width: 100px;
+        margin-bottom: 0;
+    }
+
+    .skeleton-prayer-time {
+        width: 80px;
+    }
+}
+
+/* Utility to force hide/show */
+.hidden {
+    display: none !important;
+}

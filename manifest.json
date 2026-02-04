@@ -1,0 +1,36 @@
+{
+    "name": "Satu Ramadhan - Jadwal Sholat & Imsak",
+    "short_name": "Satu Ramadhan",
+    "description": "Aplikasi jadwal sholat dan imsak Ramadhan 1447 H yang akurat berdasarkan lokasi GPS dengan metode Kemenag RI",
+    "start_url": "./index.html",
+    "scope": "./",
+    "id": "/saturamadhan/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "theme_color": "#0f4c5c",
+    "background_color": "#0a3540",
+    "lang": "id",
+    "dir": "ltr",
+    "categories": ["lifestyle", "utilities"],
+    "icons": [
+        {
+            "src": "assets/favicon/favicon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "assets/favicon/favicon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "assets/favicon/favicon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "prefer_related_applications": false
+}

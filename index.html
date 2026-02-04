@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO -->
+    <title>Satu Ramadhan - Jadwal Sholat & Imsak Ramadhan 1447 H / 2026</title>
+    <meta name="description"
+        content="Aplikasi jadwal sholat, imsak, dan buka puasa Ramadhan 1447 H / 2026 yang akurat berdasarkan lokasi GPS. Metode perhitungan Kementerian Agama RI.">
+    <meta name="keywords"
+        content="jadwal sholat, imsak, buka puasa, ramadhan 2026, 1447 H, waktu sholat, jadwal imsakiyah, indonesia, kemenag, muhammadiyah, nu">
+    <meta name="author" content="Alea Farrel">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://saturamadhan.id/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://saturamadhan.id/">
+    <meta property="og:title" content="Satu Ramadhan - Jadwal Sholat & Imsak Ramadhan 2026">
+    <meta property="og:description"
+        content="Aplikasi jadwal sholat dan imsak Ramadhan yang akurat berdasarkan lokasi GPS dengan metode Kemenag RI.">
+    <meta property="og:image" content="assets/favicon/favicon.png">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="Satu Ramadhan">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Satu Ramadhan - Jadwal Sholat & Imsak">
+    <meta name="twitter:description"
+        content="Aplikasi jadwal sholat dan imsak Ramadhan yang akurat berdasarkan lokasi.">
+    <meta name="twitter:image" content="assets/favicon/favicon.png">
+
+    <!-- Theme & PWA -->
+    <meta name="theme-color" content="#0f4c5c">
+    <meta name="msapplication-TileColor" content="#0f4c5c">
+    <meta name="application-name" content="Satu Ramadhan">
+    <meta name="apple-mobile-web-app-title" content="Satu Ramadhan">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon/favicon.webp" type="x-icon">
+    <link rel="apple-touch-icon" href="assets/favicon/favicon.png" type="x-icon">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/vendor/boxicons/css/boxicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Premium Splash Screen -->
+    <div id="splashScreen" class="splash">
+        <div class="splash__content">
+            <div class="splash__logo">
+                <img src="assets/favicon/favicon.png" alt="Satu Ramadhan" class="splash__logo-img">
+                <div class="splash__logo-glow"></div>
+            </div>
+            <h1 class="splash__title">Satu Ramadhan</h1>
+            <p class="splash__subtitle">Jadwal Sholat & Imsak</p>
+
+            <div class="splash__loader">
+                <div class="splash__progress">
+                    <div class="splash__progress-bar" id="splashProgressBar"></div>
+                </div>
+                <span class="splash__status" id="splashStatus">Memuat aplikasi...</span>
+            </div>
+        </div>
+
+        <div class="splash__decoration">
+            <div class="splash__circle splash__circle--1"></div>
+            <div class="splash__circle splash__circle--2"></div>
+            <div class="splash__circle splash__circle--3"></div>
+        </div>
+    </div>
+
+    <div id="app" class="app">
+
+        <!-- Header with Clock -->
+        <header id="header" class="header">
+            <div class="header__container container">
+                <a href="./" class="header__logo">
+                    <img src="assets/favicon/favicon.png" alt="Satu Ramadhan" class="header__logo-icon">
+                    <span class="header__logo-text">Satu Ramadhan</span>
+                </a>
+
+                <!-- Clock & Date -->
+                <div class="header__clock">
+                    <span id="headerTime" class="header__time">00:00:00</span>
+                    <span id="headerDate" class="header__date">Senin, 3 Feb 2026</span>
+                </div>
+
+                <nav id="headerNav" class="header__nav">
+                    <ul class="nav__list">
+                        <li><a href="#beranda" class="nav__link nav__link--active" data-page="beranda">Beranda</a></li>
+                        <li><a href="#pengaturan" class="nav__link" data-page="pengaturan">Pengaturan</a></li>
+                    </ul>
+                </nav>
+
+                <button id="menuToggle" class="header__menu-toggle" aria-label="Menu">
+                    <i class='bx bx-menu'></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app__main">
+
+            <!-- PAGE: Beranda -->
+            <section id="page-beranda" class="page page--active">
+                <div class="hero">
+                    <div class="hero__container container">
+                        <div class="hero__content">
+                            <div class="hero__text">
+                                <h1 class="hero__title">Ramadhan Kareem</h1>
+                                <p class="hero__subtitle">Jadwal Imsak dan Buka Puasa</p>
+                            </div>
+                            <div id="heroBadge" class="hero__badge">
+                                <span id="hijriMonth">Ramadhan</span><br>
+                                <span id="hijriYear">1447 H</span>
+                            </div>
+                        </div>
+
+                        <!-- Location Bar -->
+                        <div class="location">
+                            <div class="location__card">
+                                <div class="location__info">
+                                    <i class='bx bx-map location__icon'></i>
+                                    <div class="location__text">
+                                        <span class="location__label">Lokasi Anda</span>
+                                        <span id="locationName" class="location__name">Mendeteksi lokasi...</span>
+                                    </div>
+                                </div>
+                                <button id="locationBtn" class="location__btn" data-goto="pengaturan">
+                                    <i class='bx bx-cog'></i>
+                                    <span>Ubah</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Countdown -->
+                        <div class="countdown">
+                            <!-- Skeleton -->
+                            <div id="countdownSkeleton" class="skeleton-countdown">
+                                <div class="skeleton skeleton-countdown-title"></div>
+                                <div class="skeleton-countdown-timer">
+                                    <div class="skeleton skeleton-timer-box"></div>
+                                    <div class="skeleton skeleton-timer-box"></div>
+                                    <div class="skeleton skeleton-timer-box"></div>
+                                </div>
+                            </div>
+
+                            <!-- Real Content (Initial hidden) -->
+                            <div id="countdownCard" class="countdown__card hidden">
+                                <div class="countdown__info">
+                                    <span class="countdown__label">Menuju</span>
+                                    <span id="countdownPrayerName" class="countdown__prayer-name">Maghrib</span>
+                                </div>
+                                <div class="countdown__timer">
+                                    <div class="countdown__unit">
+                                        <span id="countdownHours" class="countdown__number">00</span>
+                                        <span class="countdown__text">Jam</span>
+                                    </div>
+                                    <span class="countdown__separator">:</span>
+                                    <div class="countdown__unit">
+                                        <span id="countdownMinutes" class="countdown__number">00</span>
+                                        <span class="countdown__text">Mnt</span>
+                                    </div>
+                                    <span class="countdown__separator">:</span>
+                                    <div class="countdown__unit">
+                                        <span id="countdownSeconds" class="countdown__number">00</span>
+                                        <span class="countdown__text">Dtk</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Prayer Times Grid -->
+                        <div class="prayer-times-header">
+                            <h2 class="prayer-times-title">Jadwal Hari Ini</h2>
+                        </div>
+
+                        <!-- Skeleton Grid -->
+                        <div id="prayerTimesSkeleton" class="skeleton-prayer-grid">
+                            <div class="skeleton skeleton-prayer-card">
+                                <div class="skeleton skeleton-prayer-name"></div>
+                                <div class="skeleton skeleton-prayer-time"></div>
+                            </div>
+                            <div class="skeleton skeleton-prayer-card">
+                                <div class="skeleton skeleton-prayer-name"></div>
+                                <div class="skeleton skeleton-prayer-time"></div>
+                            </div>
+                            <div class="skeleton skeleton-prayer-card">
+                                <div class="skeleton skeleton-prayer-name"></div>
+                                <div class="skeleton skeleton-prayer-time"></div>
+                            </div>
+                            <div class="skeleton skeleton-prayer-card">
+                                <div class="skeleton skeleton-prayer-name"></div>
+                                <div class="skeleton skeleton-prayer-time"></div>
+                            </div>
+                            <div class="skeleton skeleton-prayer-card">
+                                <div class="skeleton skeleton-prayer-name"></div>
+                                <div class="skeleton skeleton-prayer-time"></div>
+                            </div>
+                            <div class="skeleton skeleton-prayer-card">
+                                <div class="skeleton skeleton-prayer-name"></div>
+                                <div class="skeleton skeleton-prayer-time"></div>
+                            </div>
+                            <div class="skeleton skeleton-prayer-card">
+                                <div class="skeleton skeleton-prayer-name"></div>
+                                <div class="skeleton skeleton-prayer-time"></div>
+                            </div>
+                        </div>
+
+                        <div id="prayerTimesGrid" class="prayer-times-grid hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Full Month Schedule Table -->
+                <div class="section--compact schedule">
+                    <div class="container">
+                        <div class="schedule__header">
+                            <h2 class="schedule__title">Jadwal Ramadhan 1447 H</h2>
+                            <button id="toggleSchedule" class="schedule__toggle">
+                                <span>Lihat Jadwal Lengkap</span>
+                                <i class='bx bx-chevron-down'></i>
+                            </button>
+                        </div>
+                        <div id="scheduleWrapper" class="schedule__wrapper schedule__wrapper--collapsed">
+                            <div class="schedule__table-wrapper">
+                                <table class="schedule__table">
+                                    <thead>
+                                        <tr>
+                                            <th>Hari</th>
+                                            <th>Tanggal</th>
+                                            <th>Imsak</th>
+                                            <th>Subuh</th>
+                                            <th>Terbit</th>
+                                            <th>Dzuhur</th>
+                                            <th>Ashar</th>
+                                            <th>Maghrib</th>
+                                            <th>Isya</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="scheduleTableBody">
+                                        <tr>
+                                            <td colspan="9" class="text-center text-muted p-4">
+                                                <div class="spinner"></div>
+                                                <p class="mt-2 text-sm">Memuat jadwal...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Mobile Schedule Cards (hidden on desktop) -->
+                            <div id="scheduleCards" class="schedule__cards"></div>
+                        </div>
+
+                        <!-- Mobile Schedule Cards Container (outside wrapper) -->
+                        <div id="mobileScheduleCards" class="schedule__cards-mobile"></div>
+                        <div class="schedule__scroll-hint">
+                            <span>Geser untuk hari lainnya</span>
+                            <i class='bx bx-chevron-right'></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE: Pengaturan -->
+            <section id="page-pengaturan" class="page">
+                <div class="container">
+                    <div class="settings">
+                        <h2 class="settings__title">Pengaturan</h2>
+
+                        <!-- Organization Selection -->
+                        <div class="settings__section">
+                            <h3 class="settings__section-title">
+                                <i class='bx bx-building-house'></i>
+                                Organisasi
+                            </h3>
+                            <p class="settings__section-desc">Pilih organisasi untuk menentukan awal Ramadhan 1447 H</p>
+
+                            <div class="settings__options" id="organizationOptions">
+                                <label class="settings__option">
+                                    <input type="radio" name="organization" value="muhammadiyah">
+                                    <span class="settings__option-card">
+                                        <span class="settings__option-title">Muhammadiyah</span>
+                                        <span class="settings__option-desc">1 Ramadhan = 18 Februari 2026</span>
+                                    </span>
+                                </label>
+                                <label class="settings__option">
+                                    <input type="radio" name="organization" value="nu" checked>
+                                    <span class="settings__option-card">
+                                        <span class="settings__option-title">Nahdlatul Ulama</span>
+                                        <span class="settings__option-desc">1 Ramadhan = 19 Februari 2026</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Location Selection -->
+                        <div class="settings__section">
+                            <h3 class="settings__section-title">
+                                <i class='bx bx-map'></i>
+                                Lokasi
+                            </h3>
+                            <p class="settings__section-desc">Pilih lokasi untuk jadwal sholat yang akurat</p>
+
+                            <button id="useGpsBtn" class="btn btn--primary btn--full mb-4">
+                                <i class='bx bx-current-location'></i>
+                                <span>Gunakan Lokasi GPS</span>
+                            </button>
+
+                            <div class="settings__divider">
+                                <span>atau pilih manual</span>
+                            </div>
+
+                            <!-- Custom Province Dropdown -->
+                            <div class="settings__field">
+                                <label class="settings__label">Provinsi</label>
+                                <div class="custom-select" id="provinceDropdown">
+                                    <div class="custom-select__trigger" id="provinceTrigger">
+                                        <span>-- Pilih Provinsi --</span>
+                                        <i class='bx bx-chevron-down'></i>
+                                    </div>
+                                    <div class="custom-select__options" id="provinceOptions"></div>
+                                </div>
+                            </div>
+
+                            <!-- Custom Regency Dropdown -->
+                            <div class="settings__field">
+                                <label class="settings__label">Kabupaten/Kota</label>
+                                <div class="custom-select custom-select--disabled" id="regencyDropdown">
+                                    <div class="custom-select__trigger" id="regencyTrigger">
+                                        <span>-- Pilih Kabupaten/Kota --</span>
+                                        <i class='bx bx-chevron-down'></i>
+                                    </div>
+                                    <div class="custom-select__options" id="regencyOptions"></div>
+                                </div>
+                            </div>
+
+                            <div class="settings__info" id="currentLocationInfo">
+                                <i class='bx bx-info-circle'></i>
+                                <span>Lokasi saat ini: <strong id="currentLocationText">Belum diatur</strong></span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn--secondary btn--full mt-4" data-goto="beranda">
+                            <i class='bx bx-arrow-back'></i>
+                            <span>Kembali ke Beranda</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__container container">
+                <div class="footer__content">
+                    <div class="footer__brand">
+                        <span class="footer__logo">Satu Ramadhan</span>
+                        <p class="footer__desc">Jadwal sholat menggunakan metode Kemenag RI.<br>Data dari Aladhan API.
+                        </p>
+                    </div>
+                    <div class="footer__nav">
+                        <h4 class="footer__nav-title">Navigasi</h4>
+                        <ul class="footer__nav-list">
+                            <li><a href="#beranda" data-page="beranda">Beranda</a></li>
+                            <li><a href="#pengaturan" data-page="pengaturan">Pengaturan</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__connect">
+                        <h4 class="footer__nav-title">Connect</h4>
+                        <div class="footer__social">
+                            <a id="socialGithub" href="#" target="_blank" rel="noopener" class="footer__social-link"><i
+                                    class='bx bxl-github'></i></a>
+                            <a id="socialInstagram" href="#" target="_blank" rel="noopener"
+                                class="footer__social-link"><i class='bx bxl-instagram'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__bottom">
+                    <p id="footerCopyright" class="footer__copyright"></p>
+                    <a href="#" class="footer__back-top" id="backToTop">
+                        <i class='bx bx-chevron-up'></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="modal hidden">
+        <div class="modal__backdrop"></div>
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Application Loader -->
+    <script src="assets/js/loader.js"></script>
+</body>
+
+</html>
