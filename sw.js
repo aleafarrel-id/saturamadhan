@@ -4,7 +4,7 @@
  * Network-first for JS to ensure users get latest code
  */
 
-const CACHE_VERSION = 'v23';
+const CACHE_VERSION = 'v24';
 
 const CACHE_NAMES = {
     static: `satura-static-${CACHE_VERSION}`,
