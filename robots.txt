@@ -1,0 +1,12 @@
+# Robots.txt for Satu Ramadhan
+# https://saturamadhan.vercel.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://saturamadhan.vercel.app/sitemap.xml
+
+# Disallow development/system files
+Disallow: /sw.js
+Disallow: /.git/

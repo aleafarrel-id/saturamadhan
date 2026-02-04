@@ -1,7 +1,7 @@
 {
-    "name": "Satu Ramadhan - Jadwal Sholat & Imsak",
+    "name": "Satu Ramadhan",
     "short_name": "Satu Ramadhan",
-    "description": "Aplikasi jadwal sholat dan imsak Ramadhan 1447 H yang akurat berdasarkan lokasi GPS dengan metode Kemenag RI",
+    "description": "Aplikasi jadwal sholat dan imsak Ramadhan yang akurat berdasarkan lokasi GPS dengan metode Kemenag RI",
     "start_url": "./index.html",
     "scope": "./",
     "id": "/saturamadhan/",
@@ -11,7 +11,10 @@
     "background_color": "#0a3540",
     "lang": "id",
     "dir": "ltr",
-    "categories": ["lifestyle", "utilities"],
+    "categories": [
+        "lifestyle",
+        "utilities"
+    ],
     "icons": [
         {
             "src": "assets/favicon/favicon.png",
