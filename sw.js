@@ -4,7 +4,7 @@
  * Network-first for JS to ensure users get latest code
  */
 
-const CACHE_VERSION = 'v19';
+const CACHE_VERSION = 'v20';
 
 const CACHE_NAMES = {
     static: `satura-static-${CACHE_VERSION}`,
@@ -14,58 +14,58 @@ const CACHE_NAMES = {
 
 // Static assets to cache on install
 const STATIC_ASSETS = [
-    './',
-    './index.html',
-    './manifest.json',
+    '/saturamadhan/',
+    '/saturamadhan/index.html',
+    '/saturamadhan/manifest.json',
 
     // CSS Core
-    './assets/css/style.css',
-    './assets/vendor/boxicons/css/boxicons.min.css',
+    '/saturamadhan/assets/css/style.css',
+    '/saturamadhan/assets/vendor/boxicons/css/boxicons.min.css',
 
     // CSS Components (referenced via @import)
-    './assets/css/base/_variables.css',
-    './assets/css/base/_fonts.css',
-    './assets/css/base/_reset.css',
-    './assets/css/base/_typography.css',
-    './assets/css/layout/_container.css',
-    './assets/css/components/_header.css',
-    './assets/css/components/_hero.css',
-    './assets/css/components/_countdown.css',
-    './assets/css/components/_schedule.css',
-    './assets/css/components/_location.css',
-    './assets/css/components/_modal.css',
-    './assets/css/components/_buttons.css',
-    './assets/css/components/_footer.css',
-    './assets/css/components/_animations.css',
-    './assets/css/components/_settings.css',
+    '/saturamadhan/assets/css/base/_variables.css',
+    '/saturamadhan/assets/css/base/_fonts.css',
+    '/saturamadhan/assets/css/base/_reset.css',
+    '/saturamadhan/assets/css/base/_typography.css',
+    '/saturamadhan/assets/css/layout/_container.css',
+    '/saturamadhan/assets/css/components/_header.css',
+    '/saturamadhan/assets/css/components/_hero.css',
+    '/saturamadhan/assets/css/components/_countdown.css',
+    '/saturamadhan/assets/css/components/_schedule.css',
+    '/saturamadhan/assets/css/components/_location.css',
+    '/saturamadhan/assets/css/components/_modal.css',
+    '/saturamadhan/assets/css/components/_buttons.css',
+    '/saturamadhan/assets/css/components/_footer.css',
+    '/saturamadhan/assets/css/components/_animations.css',
+    '/saturamadhan/assets/css/components/_settings.css',
 
     // Fonts - Poppins
-    './assets/font/poppins/Poppins-Light.ttf',
-    './assets/font/poppins/Poppins-Regular.ttf',
-    './assets/font/poppins/Poppins-Medium.ttf',
-    './assets/font/poppins/Poppins-SemiBold.ttf',
-    './assets/font/poppins/Poppins-Bold.ttf',
+    '/saturamadhan/assets/font/poppins/Poppins-Light.ttf',
+    '/saturamadhan/assets/font/poppins/Poppins-Regular.ttf',
+    '/saturamadhan/assets/font/poppins/Poppins-Medium.ttf',
+    '/saturamadhan/assets/font/poppins/Poppins-SemiBold.ttf',
+    '/saturamadhan/assets/font/poppins/Poppins-Bold.ttf',
 
     // Fonts - Amiri
-    './assets/font/amiri/Amiri-Regular.ttf',
-    './assets/font/amiri/Amiri-Bold.ttf',
+    '/saturamadhan/assets/font/amiri/Amiri-Regular.ttf',
+    '/saturamadhan/assets/font/amiri/Amiri-Bold.ttf',
 
     // Fonts - Boxicons
-    './assets/vendor/boxicons/fonts/boxicons.woff2',
-    './assets/vendor/boxicons/fonts/boxicons.woff',
-    './assets/vendor/boxicons/fonts/boxicons.ttf',
+    '/saturamadhan/assets/vendor/boxicons/fonts/boxicons.woff2',
+    '/saturamadhan/assets/vendor/boxicons/fonts/boxicons.woff',
+    '/saturamadhan/assets/vendor/boxicons/fonts/boxicons.ttf',
 
     // JS - Loader and Modules
-    './assets/js/loader.js',
-    './assets/js/app.js',
-    './assets/js/main.js',
-    './assets/js/modules/config.js',
-    './assets/js/modules/api.js',
-    './assets/js/modules/database.js',
-    './assets/js/modules/location.js',
-    './assets/js/modules/prayer.js',
-    './assets/js/modules/storage.js',
-    './assets/js/modules/ui.js',
+    '/saturamadhan/assets/js/loader.js',
+    '/saturamadhan/assets/js/app.js',
+    '/saturamadhan/assets/js/main.js',
+    '/saturamadhan/assets/js/modules/config.js',
+    '/saturamadhan/assets/js/modules/api.js',
+    '/saturamadhan/assets/js/modules/database.js',
+    '/saturamadhan/assets/js/modules/location.js',
+    '/saturamadhan/assets/js/modules/prayer.js',
+    '/saturamadhan/assets/js/modules/storage.js',
+    '/saturamadhan/assets/js/modules/ui.js',
 ];
 
 // JS files that should use network-first strategy (for updates)
@@ -73,9 +73,9 @@ const JS_FILES_PATTERN = /\.js$/;
 
 // Database files to cache
 const DATABASE_ASSETS = [
-    './database/province.json',
-    './database/regency.json',
-    './database/ramadhan.json'
+    '/saturamadhan/database/province.json',
+    '/saturamadhan/database/regency.json',
+    '/saturamadhan/database/ramadhan.json'
 ];
 
 // API domains to cache
@@ -230,7 +230,7 @@ async function cacheFirstStrategy(request, cacheName) {
 
         // Return offline page for navigation requests
         if (request.mode === 'navigate') {
-            return caches.match('./index.html');
+            return caches.match('/saturamadhan/index.html');
         }
 
         throw error;
@@ -369,8 +369,8 @@ self.addEventListener('push', (event) => {
 
     const options = {
         body: data.body || 'Waktu sholat telah tiba',
-        icon: './assets/favicon/android-chrome-192x192.png',
-        badge: './assets/favicon/android-chrome-192x192.png',
+        icon: '/saturamadhan/assets/favicon/favicon.png',
+        badge: '/saturamadhan/assets/favicon/favicon.png',
         vibrate: [100, 50, 100],
         data: data,
         actions: [
@@ -400,7 +400,7 @@ self.addEventListener('notificationclick', (event) => {
                 }
                 // Otherwise open new window
                 if (clients.openWindow) {
-                    return clients.openWindow('./');
+                    return clients.openWindow('/saturamadhan/');
                 }
             })
         );
