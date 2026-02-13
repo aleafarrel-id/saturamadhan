@@ -136,27 +136,12 @@ const SaturaAPI = (function () {
      * @param {Object} params - Query parameters
      * @returns {Promise<Object>} - API response data
      */
-    /**
-     * Fetch from API with automatic fallback to backup endpoints
-     * @param {string} path - API path (e.g., '/timings')
-     * @param {Object} params - Query parameters
-     * @returns {Promise<Object>} - API response data
-     */
     async function fetchWithFallback(path, params = {}) {
-        // OPTIMIZATION: Removed fast-fail when offline to allow Service Worker to handle cache
-        // if (!navigator.onLine) {
-        //     SaturaConfig.log('[API] Offline - skipping network request');
-        //     throw new Error('Device is offline');
-        // }
-
         const endpoints = SaturaConfig.API.endpoints;
         let lastError = null;
 
-        // Start from the last successful endpoint
         const startIndex = getNextHealthyEndpoint();
-
-        // OPTIMIZATION: Reduce attempts when connection is slow
-        const maxEndpoints = Math.min(2, endpoints.length); // Try max 2 endpoints
+        const maxEndpoints = Math.min(2, endpoints.length);
 
         for (let attempt = 0; attempt < maxEndpoints; attempt++) {
             const endpointIndex = (startIndex + attempt) % endpoints.length;
@@ -164,12 +149,11 @@ const SaturaAPI = (function () {
 
             SaturaConfig.log(`Trying endpoint ${endpointIndex}: ${baseUrl}`);
 
-            // OPTIMIZATION: Reduce retries to 1
             try {
                 const url = buildUrl(baseUrl, path, params);
                 SaturaConfig.log(`Fetching: ${url}`);
 
-                const response = await fetchWithTimeout(url, {}, 5000); // 5s timeout
+                const response = await fetchWithTimeout(url, {}, 5000);
 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -215,9 +199,9 @@ const SaturaAPI = (function () {
     async function getPrayerTimes(latitude, longitude, date = null) {
         const targetDate = date ? new Date(date) : new Date();
 
-        // Round coordinates to 4 decimal places (approx 11m) to improve cache hit rate
-        const lat = Number(latitude).toFixed(4);
-        const lng = Number(longitude).toFixed(4);
+        // Use full precision coordinates for maximum accuracy
+        const lat = Number(latitude);
+        const lng = Number(longitude);
 
         const params = {
             latitude: lat,
@@ -245,9 +229,9 @@ const SaturaAPI = (function () {
     async function getPrayerTimesByTimestamp(latitude, longitude, timestamp = null) {
         const ts = timestamp || Math.floor(Date.now() / 1000);
 
-        // Round coordinates to 4 decimal places
-        const lat = Number(latitude).toFixed(4);
-        const lng = Number(longitude).toFixed(4);
+        // Use full precision coordinates for maximum accuracy
+        const lat = Number(latitude);
+        const lng = Number(longitude);
 
         const params = {
             latitude: lat,
@@ -272,9 +256,9 @@ const SaturaAPI = (function () {
      * @returns {Promise<Object>} - Monthly calendar data
      */
     async function getMonthlyCalendar(latitude, longitude, month, year) {
-        // Round coordinates to 4 decimal places
-        const lat = Number(latitude).toFixed(4);
-        const lng = Number(longitude).toFixed(4);
+        // Use full precision coordinates for maximum accuracy
+        const lat = Number(latitude);
+        const lng = Number(longitude);
 
         const params = {
             latitude: lat,
@@ -301,9 +285,9 @@ const SaturaAPI = (function () {
      * @returns {Promise<Object>} - Hijri calendar data
      */
     async function getHijriCalendar(latitude, longitude, month, year) {
-        // Round coordinates to 4 decimal places
-        const lat = Number(latitude).toFixed(4);
-        const lng = Number(longitude).toFixed(4);
+        // Use full precision coordinates for maximum accuracy
+        const lat = Number(latitude);
+        const lng = Number(longitude);
 
         const params = {
             latitude: lat,

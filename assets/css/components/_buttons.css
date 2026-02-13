@@ -86,6 +86,24 @@
     animation: spin 1s linear infinite;
 }
 
+/* Button Loading State */
+.btn--loading {
+    pointer-events: none;
+    opacity: 0.85;
+    position: relative;
+}
+
+.btn--loading .btn__spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
 @keyframes spin {
     to {
         transform: rotate(360deg);

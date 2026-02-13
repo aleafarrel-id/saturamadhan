@@ -4,8 +4,10 @@
  * Network-first for JS to ensure users get latest code
  */
 
-const CACHE_VERSION = 'v24';
+const CACHE_VERSION = 'v25';
 
+// Cache base names must match SaturaConfig.CACHE.names in config.js.
+// Duplicated here because Service Workers cannot import app modules.
 const CACHE_NAMES = {
     static: `satura-static-${CACHE_VERSION}`,
     api: `satura-api-${CACHE_VERSION}`,
@@ -167,8 +169,8 @@ self.addEventListener('fetch', (event) => {
 
     // Determine caching strategy based on request type
     if (isApiRequest(url)) {
-        // Stale-while-revalidate for API - faster offline, updates in background
-        event.respondWith(staleWhileRevalidateStrategy(request, CACHE_NAMES.api));
+        // Stale-while-revalidate for API with GPS coordinate normalization
+        event.respondWith(staleWhileRevalidateStrategy(request, CACHE_NAMES.api, url));
     } else if (isDatabaseRequest(url)) {
         // Cache-first for database files
         event.respondWith(cacheFirstStrategy(request, CACHE_NAMES.database));
@@ -294,17 +296,53 @@ async function networkFirstStrategy(request, cacheName) {
 }
 
 /**
- * Stale-while-revalidate strategy
- * Return cache immediately, update cache in background
+ * Normalize API URL for cache key consistency
+ * Rounds GPS coordinates to 4 decimals (~11m) so that slight GPS drift
+ * doesn't cause cache misses, while the actual API request uses full precision.
+ * @param {URL} url - Original request URL
+ * @returns {string} - Normalized URL string for cache key
  */
-async function staleWhileRevalidateStrategy(request, cacheName) {
-    const cache = await caches.open(cacheName);
-    const cachedResponse = await cache.match(request);
+function normalizeApiUrl(url) {
+    const normalized = new URL(url.toString());
+    ['latitude', 'longitude'].forEach(param => {
+        if (normalized.searchParams.has(param)) {
+            const val = Number(normalized.searchParams.get(param));
+            if (!isNaN(val)) {
+                normalized.searchParams.set(param, val.toFixed(4));
+            }
+        }
+    });
+    return normalized.toString();
+}
 
-    // Fetch in background
+/**
+ * Stale-while-revalidate strategy with URL normalization for API requests
+ * Uses normalized URL (rounded GPS coords) as cache key for high hit rate,
+ * but fetches with original URL for maximum accuracy.
+ * @param {Request} request - Original request with full-precision GPS
+ * @param {string} cacheName - Cache name to use
+ * @param {URL} requestUrl - Parsed URL for normalization (optional)
+ */
+async function staleWhileRevalidateStrategy(request, cacheName, requestUrl = null) {
+    const cache = await caches.open(cacheName);
+
+    // For API requests: normalize GPS coordinates in cache key
+    let cacheKey = request;
+    if (requestUrl && isApiRequest(requestUrl)) {
+        const normalizedUrl = normalizeApiUrl(requestUrl);
+        cacheKey = new Request(normalizedUrl, {
+            method: request.method,
+            headers: request.headers
+        });
+    }
+
+    const cachedResponse = await cache.match(cacheKey);
+
+    // Fetch with ORIGINAL URL (full precision) in background
     const fetchPromise = fetch(request).then((networkResponse) => {
         if (networkResponse.ok) {
-            cache.put(request, networkResponse.clone());
+            // Store with NORMALIZED key for future cache hits
+            cache.put(cacheKey, networkResponse.clone());
         }
         return networkResponse;
     }).catch(() => cachedResponse);

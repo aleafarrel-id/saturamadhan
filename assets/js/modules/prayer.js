@@ -30,7 +30,7 @@ const SaturaPrayer = (function () {
             return todaySchedule;
         }
 
-        // OPTIMIZATION: Try localStorage cache first (sync, fast)
+        // Try localStorage cache first
         if (!forceRefresh) {
             const cached = getCachedScheduleSync(todayString);
             if (cached) {
@@ -40,13 +40,6 @@ const SaturaPrayer = (function () {
                 return todaySchedule;
             }
         }
-
-        // OPTIMIZATION: If offline, don't even try API
-        // if (!navigator.onLine) {
-        //     SaturaConfig.log('Offline - cannot fetch fresh data');
-        //     if (todaySchedule) return todaySchedule;
-        //     throw new Error('Offline and no cached data available');
-        // }
 
         // Get location
         const location = await SaturaLocation.getLocation();
@@ -83,32 +76,16 @@ const SaturaPrayer = (function () {
     function getCachedScheduleSync(dateString) {
         try {
             const key = `${SaturaConfig.CACHE.keys.prayerCache}_${dateString}`;
-            const stored = localStorage.getItem(key);
-            if (!stored) return null;
-
-            const data = JSON.parse(stored);
-
-            // Handle format from cacheSchedule(): { schedule, cachedAt }
-            if (data.schedule !== undefined) {
-                // Only check TTL when online - offline should use any cached data
-                if (navigator.onLine && data.cachedAt) {
-                    const age = Date.now() - data.cachedAt;
-                    if (age > SaturaConfig.CACHE.duration.prayerTimes) {
-                        return null;
-                    }
-                }
-                return data.schedule;
+            // SaturaStorage.get() handles TTL expiration automatically
+            // When offline, we want to use any cached data regardless of TTL
+            if (!navigator.onLine) {
+                // Bypass TTL check when offline by reading raw localStorage
+                const stored = localStorage.getItem(key);
+                if (!stored) return null;
+                const data = JSON.parse(stored);
+                return data.value !== undefined ? data.value : null;
             }
-
-            // Handle legacy format from SaturaStorage: { value, timestamp, ttl }
-            if (data.value !== undefined) {
-                if (navigator.onLine && data.ttl && (Date.now() - data.timestamp > data.ttl)) {
-                    return null;
-                }
-                return data.value;
-            }
-
-            return null;
+            return SaturaStorage.get(key);
         } catch (e) {
             return null;
         }
@@ -214,23 +191,28 @@ const SaturaPrayer = (function () {
 
         Object.entries(SaturaConfig.PRAYER.apiMapping).forEach(([apiKey, localKey]) => {
             if (timings[apiKey]) {
+                // Sanitize timezone suffix e.g. "04:32 (WIB)" → "04:32"
+                const cleanTime = String(timings[apiKey]).split(' ')[0];
                 prayerTimes[localKey] = {
-                    time: timings[apiKey],
+                    time: cleanTime,
                     name: SaturaConfig.PRAYER.names[localKey],
                     apiKey: apiKey
                 };
             }
         });
 
-        // Handle Imsak
-        // API provides Imsak directly, but we can also calculate from Fajr
-        if (!prayerTimes.imsak && prayerTimes.fajr) {
+        // Handle Imsak — API data is prioritized, calculation is fallback only
+        if (prayerTimes.imsak) {
+            prayerTimes.imsak.source = 'api';
+        } else if (prayerTimes.fajr) {
             const calculatedImsak = SaturaAPI.calculateImsak(prayerTimes.fajr.time);
             prayerTimes.imsak = {
                 time: calculatedImsak,
                 name: SaturaConfig.PRAYER.names.imsak,
-                calculated: true
+                calculated: true,
+                source: 'calculated'
             };
+            SaturaConfig.log('Imsak calculated from Fajr (API did not provide Imsak)');
         }
 
         // Build schedule object
@@ -513,28 +495,19 @@ const SaturaPrayer = (function () {
         };
     }
 
-    // ===========================================
-    // CACHING FUNCTIONS
-    // ===========================================
-
     /**
-     * Cache schedule to localStorage
+     * Cache schedule to localStorage via SaturaStorage
      * @param {string} dateString - Date string key
      * @param {Object} schedule - Schedule to cache
      */
     async function cacheSchedule(dateString, schedule) {
         try {
             const cacheKey = `${SaturaConfig.CACHE.keys.prayerCache}_${dateString}`;
-            const cacheData = {
-                schedule: schedule,
-                cachedAt: Date.now()
-            };
-
-            localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+            SaturaStorage.set(cacheKey, schedule, SaturaConfig.CACHE.duration.prayerTimes);
             SaturaConfig.log('Cached schedule for', dateString);
 
-            // Clean old cache entries
-            cleanOldCache();
+            // Clean expired entries across all storage
+            SaturaStorage.cleanExpired();
 
         } catch (error) {
             SaturaConfig.error('Failed to cache schedule:', error);
@@ -542,62 +515,23 @@ const SaturaPrayer = (function () {
     }
 
     /**
-     * Get cached schedule from localStorage
+     * Get cached schedule from localStorage via SaturaStorage
      * @param {string} dateString - Date string key
      * @returns {Object|null} - Cached schedule or null
      */
     async function getCachedSchedule(dateString) {
         try {
             const cacheKey = `${SaturaConfig.CACHE.keys.prayerCache}_${dateString}`;
-            const cached = localStorage.getItem(cacheKey);
+            const cached = SaturaStorage.get(cacheKey);
 
-            if (!cached) {
-                return null;
+            if (cached) {
+                SaturaConfig.log('Found cached schedule for', dateString);
             }
-
-            const data = JSON.parse(cached);
-
-            // Check if cache is expired
-            const age = Date.now() - data.cachedAt;
-            if (age > SaturaConfig.CACHE.duration.prayerTimes) {
-                localStorage.removeItem(cacheKey);
-                return null;
-            }
-
-            SaturaConfig.log('Found cached schedule for', dateString);
-            return data.schedule;
+            return cached;
 
         } catch (error) {
             SaturaConfig.error('Failed to get cached schedule:', error);
             return null;
-        }
-    }
-
-    /**
-     * Clean old cache entries
-     */
-    function cleanOldCache() {
-        try {
-            const prefix = SaturaConfig.CACHE.keys.prayerCache;
-            const maxAge = SaturaConfig.CACHE.duration.prayerTimes;
-            const now = Date.now();
-
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (!key.startsWith(prefix)) continue;
-
-                try {
-                    const data = JSON.parse(localStorage.getItem(key));
-                    if (now - data.cachedAt > maxAge) {
-                        localStorage.removeItem(key);
-                    }
-                } catch (e) {
-                    // Remove invalid entries
-                    localStorage.removeItem(key);
-                }
-            }
-        } catch (error) {
-            SaturaConfig.error('Failed to clean cache:', error);
         }
     }
 
@@ -710,17 +644,7 @@ const SaturaPrayer = (function () {
         todaySchedule = null;
         scheduleDate = null;
 
-        const prefix = SaturaConfig.CACHE.keys.prayerCache;
-        const keysToRemove = [];
-
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key.startsWith(prefix)) {
-                keysToRemove.push(key);
-            }
-        }
-
-        keysToRemove.forEach(key => localStorage.removeItem(key));
+        SaturaStorage.clearByPrefix(SaturaConfig.CACHE.keys.prayerCache);
         SaturaConfig.log('Prayer cache cleared');
     }
 
@@ -752,7 +676,6 @@ const SaturaPrayer = (function () {
         // Cache
         cacheSchedule,
         getCachedSchedule,
-        cleanOldCache,
         clearCache,
 
         // Utility

@@ -23,6 +23,20 @@
 
             const data = await response.json();
             ramadhanConfig = data;
+
+            // Validate year — warn if ramadhan.json is outdated
+            const currentYear = new Date().getFullYear();
+            if (data.tahunMasehi && data.tahunMasehi !== currentYear) {
+                console.warn(`[Main] ramadhan.json is for ${data.tahunMasehi}, but current year is ${currentYear}`);
+                // Defer notification so it appears after splash screen
+                setTimeout(() => {
+                    showNotification(
+                        `Data Ramadhan masih untuk tahun ${data.tahunMasehi}. Jadwal mungkin tidak akurat untuk tahun ${currentYear}.`,
+                        'warning'
+                    );
+                }, 3000);
+            }
+
             return data;
         } catch (error) {
             console.error('[Main] Failed to load Ramadhan config:', error);
@@ -87,6 +101,15 @@
     function formatTime(timeStr) {
         if (!timeStr) return '-';
         return timeStr.split(' ')[0]; // Remove anything after space (timezone)
+    }
+
+    // Security: escape HTML entities to prevent XSS
+    function escapeHTML(str) {
+        if (str === null || str === undefined) return '';
+        const s = String(str);
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
     }
 
     // DOM Elements
@@ -215,8 +238,8 @@
         if (!elements.provinceOptions) return;
 
         elements.provinceOptions.innerHTML = provincesData.map(p => `
-            <div class="custom-select__option" data-value="${p.id}" data-name="${p.name}">
-                ${p.name}
+            <div class="custom-select__option" data-value="${escapeHTML(p.id)}" data-name="${escapeHTML(p.name)}">
+                ${escapeHTML(p.name)}
             </div>
         `).join('');
 
@@ -249,8 +272,8 @@
         if (!elements.regencyOptions) return;
 
         elements.regencyOptions.innerHTML = regenciesData.map(r => `
-            <div class="custom-select__option" data-value="${r.id}" data-name="${r.name}" data-lat="${r.latitude}" data-lng="${r.longitude}">
-                ${r.name}
+            <div class="custom-select__option" data-value="${escapeHTML(r.id)}" data-name="${escapeHTML(r.name)}" data-lat="${escapeHTML(r.latitude)}" data-lng="${escapeHTML(r.longitude)}">
+                ${escapeHTML(r.name)}
             </div>
         `).join('');
 
@@ -294,7 +317,22 @@
             return;
         }
 
-        showLoading();
+        const gpsBtn = document.getElementById('useGpsBtn');
+        if (!gpsBtn) return;
+
+        // Prevent double-click
+        if (gpsBtn.classList.contains('btn--loading')) return;
+
+        // Save original content and show spinner
+        const originalHTML = gpsBtn.innerHTML;
+        gpsBtn.classList.add('btn--loading');
+        gpsBtn.disabled = true;
+        gpsBtn.innerHTML = '';
+        const spinner = document.createElement('span');
+        spinner.className = 'btn__spinner';
+        gpsBtn.appendChild(spinner);
+        gpsBtn.appendChild(document.createTextNode(' Mendeteksi lokasi...'));
+
         try {
             const pos = await new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition(resolve, reject, {
@@ -310,33 +348,32 @@
             const name = nearest ? nearest.name : 'Lokasi GPS';
 
             await setLocationAndRefresh(lat, lng, name);
-            hideLoading();
             showNotification('Lokasi GPS berhasil: ' + name, 'success');
         } catch (err) {
-            hideLoading();
             console.error('GPS error:', err);
             showNotification('GPS gagal. Silakan pilih lokasi manual.', 'error');
+        } finally {
+            // Always restore button — whether success or failure
+            gpsBtn.classList.remove('btn--loading');
+            gpsBtn.disabled = false;
+            gpsBtn.innerHTML = originalHTML;
         }
     }
 
     async function setLocationAndRefresh(lat, lng, name) {
-        // IMPORTANT: Update SaturaLocation module's internal state
-        // This is critical for fetchTodaySchedule() to use the correct coordinates
+        // Update SaturaLocation internal state for coordinate lookups
         await SaturaLocation.setLocationByCoordinates(lat, lng);
 
-        // Also save to our local storage for display purposes
         SaturaStorage.set('user_location', { latitude: lat, longitude: lng, name: name });
         updateLocationDisplay(name);
 
         try {
-            // Now refreshPrayerTimes will use the updated coordinates from SaturaLocation
             await SaturaApp.refreshPrayerTimes();
             await loadMonthlySchedule(lat, lng);
-            // Pre-fetch tomorrow's schedule for countdown after Isya
             await fetchTomorrowSchedule(lat, lng);
         } catch (err) {
             console.error('Failed to refresh:', err);
-            throw err; // Re-throw so caller can handle
+            throw err;
         }
     }
 
@@ -421,15 +458,15 @@
 
             html += `
                 <tr class="${isToday ? 'is-today' : ''}">
-                    <td>${ramadhanDay}</td>
-                    <td>${dateStr}</td>
-                    <td class="time-primary">${formatTime(timings.Imsak)}</td>
-                    <td>${formatTime(timings.Fajr)}</td>
-                    <td>${formatTime(timings.Sunrise)}</td>
-                    <td>${formatTime(timings.Dhuhr)}</td>
-                    <td>${formatTime(timings.Asr)}</td>
-                    <td class="time-accent">${formatTime(timings.Maghrib)}</td>
-                    <td>${formatTime(timings.Isha)}</td>
+                    <td>${escapeHTML(ramadhanDay)}</td>
+                    <td>${escapeHTML(dateStr)}</td>
+                    <td class="time-primary">${escapeHTML(formatTime(timings.Imsak))}</td>
+                    <td>${escapeHTML(formatTime(timings.Fajr))}</td>
+                    <td>${escapeHTML(formatTime(timings.Sunrise))}</td>
+                    <td>${escapeHTML(formatTime(timings.Dhuhr))}</td>
+                    <td>${escapeHTML(formatTime(timings.Asr))}</td>
+                    <td class="time-accent">${escapeHTML(formatTime(timings.Maghrib))}</td>
+                    <td>${escapeHTML(formatTime(timings.Isha))}</td>
                 </tr>
             `;
         }
@@ -476,8 +513,8 @@
                 <div class="schedule-card ${isToday ? 'is-today' : ''}">
                     <div class="schedule-card__header">
                         <div class="schedule-card__header-content">
-                            <span class="schedule-card__day">Hari ${ramadhanDay}</span>
-                            <span class="schedule-card__date">${dateStr}</span>
+                            <span class="schedule-card__day">Hari ${escapeHTML(ramadhanDay)}</span>
+                            <span class="schedule-card__date">${escapeHTML(dateStr)}</span>
                         </div>
                         ${isToday ? '<span class="schedule-card__badge">Hari Ini</span>' : ''}
                     </div>
@@ -485,31 +522,31 @@
                         <div class="schedule-card__grid">
                             <div class="schedule-time-box schedule-time-box--imsak">
                                 <span class="schedule-time-box__label">Imsak</span>
-                                <span class="schedule-time-box__value">${formatTime(timings.Imsak)}</span>
+                                <span class="schedule-time-box__value">${escapeHTML(formatTime(timings.Imsak))}</span>
                             </div>
                             <div class="schedule-time-box">
                                 <span class="schedule-time-box__label">Subuh</span>
-                                <span class="schedule-time-box__value">${formatTime(timings.Fajr)}</span>
+                                <span class="schedule-time-box__value">${escapeHTML(formatTime(timings.Fajr))}</span>
                             </div>
                             <div class="schedule-time-box">
                                 <span class="schedule-time-box__label">Terbit</span>
-                                <span class="schedule-time-box__value">${formatTime(timings.Sunrise)}</span>
+                                <span class="schedule-time-box__value">${escapeHTML(formatTime(timings.Sunrise))}</span>
                             </div>
                             <div class="schedule-time-box">
                                 <span class="schedule-time-box__label">Dzuhur</span>
-                                <span class="schedule-time-box__value">${formatTime(timings.Dhuhr)}</span>
+                                <span class="schedule-time-box__value">${escapeHTML(formatTime(timings.Dhuhr))}</span>
                             </div>
                             <div class="schedule-time-box">
                                 <span class="schedule-time-box__label">Ashar</span>
-                                <span class="schedule-time-box__value">${formatTime(timings.Asr)}</span>
+                                <span class="schedule-time-box__value">${escapeHTML(formatTime(timings.Asr))}</span>
                             </div>
                             <div class="schedule-time-box schedule-time-box--maghrib">
                                 <span class="schedule-time-box__label">Maghrib</span>
-                                <span class="schedule-time-box__value">${formatTime(timings.Maghrib)}</span>
+                                <span class="schedule-time-box__value">${escapeHTML(formatTime(timings.Maghrib))}</span>
                             </div>
                             <div class="schedule-time-box">
                                 <span class="schedule-time-box__label">Isya</span>
-                                <span class="schedule-time-box__value">${formatTime(timings.Isha)}</span>
+                                <span class="schedule-time-box__value">${escapeHTML(formatTime(timings.Isha))}</span>
                             </div>
                         </div>
                     </div>
@@ -571,11 +608,11 @@
             return `
             <div class="prayer-time-item ${nextPrayer?.key === prayer.key ? 'is-next' : ''}">
                 <div class="prayer-time-item__icon">
-                    <img src="assets/icon/${iconFile}" alt="${prayer.name}" loading="lazy">
+                    <img src="assets/icon/${escapeHTML(iconFile)}" alt="${escapeHTML(prayer.name)}" loading="lazy">
                 </div>
                 <div class="prayer-time-item__content">
-                    <div class="prayer-time-item__name">${prayer.name}</div>
-                    <div class="prayer-time-item__time">${prayer.time || '--:--'}</div>
+                    <div class="prayer-time-item__name">${escapeHTML(prayer.name)}</div>
+                    <div class="prayer-time-item__time">${escapeHTML(prayer.time || '--:--')}</div>
                 </div>
             </div>
         `}).join('');
@@ -630,7 +667,7 @@
                 year: 'numeric'
             });
 
-            titleEl.innerHTML = `Jadwal untuk Besok <span class="tomorrow-date">${dateStr}</span>`;
+            titleEl.innerHTML = `Jadwal untuk Besok <span class="tomorrow-date">${escapeHTML(dateStr)}</span>`;
         } else {
             titleEl.textContent = 'Jadwal Hari Ini';
         }
@@ -819,7 +856,7 @@
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     const { outcome } = await deferredPrompt.userChoice;
-                    console.log(`User response to the install prompt: ${outcome}`);
+                    SaturaConfig.log(`Install prompt response: ${outcome}`);
                     deferredPrompt = null;
 
                     // Hide immediately if accepted, although appinstalled will also fire
@@ -908,10 +945,18 @@
             const author = SaturaConfig.AUTHOR;
             const year = new Date().getFullYear();
 
-            // Copyright
+            // Copyright - use DOM API to avoid inline onclick XSS vector
             const copyrightEl = document.getElementById('footerCopyright');
             if (copyrightEl) {
-                copyrightEl.innerHTML = `&copy; ${year} <span class="footer__highlight" onclick="window.open('${author.website}', '_blank')" style="cursor: pointer; color: var(--clr-accent-500); font-weight: bold;">${author.copyright}</span>. All rights reserved.`;
+                copyrightEl.textContent = '';
+                copyrightEl.appendChild(document.createTextNode(`\u00A9 ${year} `));
+                const highlightSpan = document.createElement('span');
+                highlightSpan.className = 'footer__highlight';
+                highlightSpan.textContent = author.copyright;
+                highlightSpan.style.cssText = 'cursor: pointer; color: var(--clr-accent-500); font-weight: bold;';
+                highlightSpan.addEventListener('click', () => window.open(author.website, '_blank', 'noopener,noreferrer'));
+                copyrightEl.appendChild(highlightSpan);
+                copyrightEl.appendChild(document.createTextNode('. All rights reserved.'));
             }
 
             // Social Links
@@ -924,8 +969,11 @@
                         const link = document.createElement('a');
                         link.href = social.url;
                         link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
                         link.className = 'footer__social-link';
-                        link.innerHTML = `<i class='bx bxl-${key}'></i>`;
+                        const icon = document.createElement('i');
+                        icon.className = `bx bxl-${escapeHTML(key)}`;
+                        link.appendChild(icon);
                         socialContainer.appendChild(link);
                     }
                 });

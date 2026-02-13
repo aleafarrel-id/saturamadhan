@@ -13,6 +13,15 @@ const SaturaUI = (function () {
     let isInitialized = false;
     let currentModal = null;
 
+    // Security: escape HTML entities to prevent XSS
+    function escapeHTML(str) {
+        if (str === null || str === undefined) return '';
+        const s = String(str);
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+    }
+
     // ===========================================
     // INITIALIZATION
     // ===========================================
@@ -50,7 +59,16 @@ const SaturaUI = (function () {
         // 1. Update Copyright
         const copyrightEl = document.getElementById('footerCopyright');
         if (copyrightEl) {
-            copyrightEl.innerHTML = `&copy; ${currentYear} <span class="footer__highlight" onclick="window.open('${author.website}', '_blank')" title="Kunjungi Portofolio">${author.copyright}</span>. All rights reserved.`;
+            copyrightEl.textContent = '';
+            copyrightEl.appendChild(document.createTextNode(`\u00A9 ${currentYear} `));
+            const highlightSpan = document.createElement('span');
+            highlightSpan.className = 'footer__highlight';
+            highlightSpan.textContent = author.copyright;
+            highlightSpan.style.cursor = 'pointer';
+            highlightSpan.setAttribute('title', 'Kunjungi Portofolio');
+            highlightSpan.addEventListener('click', () => window.open(author.website, '_blank', 'noopener,noreferrer'));
+            copyrightEl.appendChild(highlightSpan);
+            copyrightEl.appendChild(document.createTextNode('. All rights reserved.'));
         }
 
         // 2. Update Social Links
@@ -65,7 +83,7 @@ const SaturaUI = (function () {
                     const link = document.createElement('a');
                     link.href = social.url;
                     link.target = '_blank';
-                    link.rel = 'noopener';
+                    link.rel = 'noopener noreferrer';
                     link.className = 'footer__social-link';
                     link.setAttribute('aria-label', key);
 
@@ -76,7 +94,9 @@ const SaturaUI = (function () {
                     if (key === 'twitter') iconClass = 'bx bxl-twitter';
                     if (key === 'linkedin') iconClass = 'bx bxl-linkedin';
 
-                    link.innerHTML = `<i class='${iconClass}'></i>`;
+                    const icon = document.createElement('i');
+                    icon.className = iconClass;
+                    link.appendChild(icon);
                     socialContainer.appendChild(link);
                 }
             });
@@ -225,13 +245,21 @@ const SaturaUI = (function () {
         const sunrise = times.find(t => t.key === 'sunrise');
         const maghrib = times.find(t => t.key === 'maghrib');
 
+        // Escape helper for security
+        const esc = (s) => {
+            if (s === null || s === undefined) return '';
+            const d = document.createElement('div');
+            d.textContent = String(s);
+            return d.innerHTML;
+        };
+
         row.innerHTML = `
-            <td class="text-accent font-bold">${hijriDay}</td>
-            <td>${gregorianDate}</td>
-            <td>${dayName}</td>
-            <td class="time-primary">${imsak?.time || fajr?.time || '-'}</td>
-            <td class="time-primary">${sunrise?.time || '-'}</td>
-            <td class="time-accent font-bold">${maghrib?.time || '-'}</td>
+            <td class="text-accent font-bold">${esc(hijriDay)}</td>
+            <td>${esc(gregorianDate)}</td>
+            <td>${esc(dayName)}</td>
+            <td class="time-primary">${esc(imsak?.time || fajr?.time || '-')}</td>
+            <td class="time-primary">${esc(sunrise?.time || '-')}</td>
+            <td class="time-accent font-bold">${esc(maghrib?.time || '-')}</td>
         `;
 
         elements.scheduleTableBody.appendChild(row);
@@ -258,9 +286,9 @@ const SaturaUI = (function () {
 
         // Always rebuild grid when updating to ensure structure matches
         const html = times.map(prayer => `
-            <div id="prayer-${prayer.key}" class="prayer-time-item ${prayer.isNext ? 'is-next' : ''}">
-                <div class="prayer-time-item__name">${prayer.name}</div>
-                <div class="prayer-time-item__time">${prayer.time}</div>
+            <div id="prayer-${escapeHTML(prayer.key)}" class="prayer-time-item ${prayer.isNext ? 'is-next' : ''}">
+                <div class="prayer-time-item__name">${escapeHTML(prayer.name)}</div>
+                <div class="prayer-time-item__time">${escapeHTML(prayer.time)}</div>
             </div>
         `).join('');
         elements.prayerTimesGrid.innerHTML = html;
@@ -319,9 +347,15 @@ const SaturaUI = (function () {
             const isRamadhan = hijri.month?.number === 9;
 
             if (isRamadhan) {
-                elements.heroBadge.innerHTML = `Ramadhan<br>${hijri.year} H`;
+                elements.heroBadge.textContent = '';
+                elements.heroBadge.appendChild(document.createTextNode('Ramadhan'));
+                elements.heroBadge.appendChild(document.createElement('br'));
+                elements.heroBadge.appendChild(document.createTextNode(`${hijri.year} H`));
             } else {
-                elements.heroBadge.innerHTML = `${hijri.month?.en || ''}<br>${hijri.year} H`;
+                elements.heroBadge.textContent = '';
+                elements.heroBadge.appendChild(document.createTextNode(hijri.month?.en || ''));
+                elements.heroBadge.appendChild(document.createElement('br'));
+                elements.heroBadge.appendChild(document.createTextNode(`${hijri.year} H`));
             }
         }
     }
@@ -438,10 +472,17 @@ const SaturaUI = (function () {
         item.className = 'location-selector__item';
         item.dataset.regencyId = regency.id;
 
-        item.innerHTML = `
-            <div class="location-selector__item-name">${regency.name}</div>
-            ${showProvince ? `<div class="location-selector__item-province">${regency.province_name || ''}</div>` : ''}
-        `;
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'location-selector__item-name';
+        nameDiv.textContent = regency.name;
+        item.appendChild(nameDiv);
+
+        if (showProvince) {
+            const provDiv = document.createElement('div');
+            provDiv.className = 'location-selector__item-province';
+            provDiv.textContent = regency.province_name || '';
+            item.appendChild(provDiv);
+        }
 
         item.addEventListener('click', () => selectRegency(regency.id));
 
@@ -476,11 +517,13 @@ const SaturaUI = (function () {
      */
     function showLoading(target = null) {
         if (target) {
-            target.innerHTML = `
-                <div class="flex justify-center items-center p-lg">
-                    <div class="spinner"></div>
-                </div>
-            `;
+            target.textContent = '';
+            const wrapper = document.createElement('div');
+            wrapper.className = 'flex justify-center items-center p-lg';
+            const spinner = document.createElement('div');
+            spinner.className = 'spinner';
+            wrapper.appendChild(spinner);
+            target.appendChild(wrapper);
             return;
         }
 

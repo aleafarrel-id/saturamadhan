@@ -140,7 +140,28 @@ const SaturaConfig = (function () {
         },
 
         // Timezone default (WIB)
-        defaultTimezone: 'Asia/Jakarta'
+        defaultTimezone: 'Asia/Jakarta',
+
+        // Timezone mapping per province ID
+        // WIB (UTC+7): Sumatera, Jawa, Kalimantan Barat & Tengah
+        // WITA (UTC+8): Kalimantan Selatan/Timur/Utara, Sulawesi, Bali, NTB, NTT
+        // WIT (UTC+9): Maluku, Papua
+        timezones: {
+            '11': 'Asia/Jakarta', '12': 'Asia/Jakarta', '13': 'Asia/Jakarta',
+            '14': 'Asia/Jakarta', '15': 'Asia/Jakarta', '16': 'Asia/Jakarta',
+            '17': 'Asia/Jakarta', '18': 'Asia/Jakarta', '19': 'Asia/Jakarta',
+            '21': 'Asia/Jakarta',
+            '31': 'Asia/Jakarta', '32': 'Asia/Jakarta', '33': 'Asia/Jakarta',
+            '34': 'Asia/Jakarta', '35': 'Asia/Jakarta', '36': 'Asia/Jakarta',
+            '61': 'Asia/Jakarta', '62': 'Asia/Jakarta',
+            '51': 'Asia/Makassar', '52': 'Asia/Makassar', '53': 'Asia/Makassar',
+            '63': 'Asia/Makassar', '64': 'Asia/Makassar', '65': 'Asia/Makassar',
+            '71': 'Asia/Makassar', '72': 'Asia/Makassar', '73': 'Asia/Makassar',
+            '74': 'Asia/Makassar', '75': 'Asia/Makassar', '76': 'Asia/Makassar',
+            '81': 'Asia/Jayapura', '82': 'Asia/Jayapura',
+            '91': 'Asia/Jayapura', '92': 'Asia/Jayapura', '93': 'Asia/Jayapura',
+            '94': 'Asia/Jayapura', '95': 'Asia/Jayapura', '96': 'Asia/Jayapura'
+        }
     };
 
     // ===========================================
@@ -289,6 +310,11 @@ const SaturaConfig = (function () {
         // Helper untuk error log
         error: function (...args) {
             console.error('[Satura Error]', ...args);
+        },
+
+        // Helper untuk mendapatkan timezone berdasarkan province ID
+        getTimezoneForProvince: function (provinceId) {
+            return this.LOCATION.timezones[provinceId] || this.LOCATION.defaultTimezone;
         }
     };
 })();

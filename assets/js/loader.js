@@ -8,7 +8,7 @@
     'use strict';
 
     // App version - increment when deploying updates
-    const APP_VERSION = '1.2.1';
+    const APP_VERSION = '1.3.0';
     const VERSION_KEY = 'satura_app_version';
 
     // Splash screen elements
@@ -240,14 +240,19 @@
             console.error('[Loader] Failed to load:', error);
             updateProgress(0, 'Gagal memuat aplikasi');
 
-            // Show error message in splash
+            // Show error message in splash - use DOM API for security
             if (statusText) {
-                statusText.innerHTML = `
-                    <span style="color: #ff6b6b;">Gagal memuat aplikasi</span><br>
-                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--clr-accent-500); border: none; border-radius: 8px; color: white; cursor: pointer;">
-                        Coba Lagi
-                    </button>
-                `;
+                statusText.textContent = '';
+                const errorSpan = document.createElement('span');
+                errorSpan.style.color = '#ff6b6b';
+                errorSpan.textContent = 'Gagal memuat aplikasi';
+                statusText.appendChild(errorSpan);
+                statusText.appendChild(document.createElement('br'));
+                const retryBtn = document.createElement('button');
+                retryBtn.textContent = 'Coba Lagi';
+                retryBtn.style.cssText = 'margin-top: 1rem; padding: 0.5rem 1rem; background: var(--clr-accent-500); border: none; border-radius: 8px; color: white; cursor: pointer;';
+                retryBtn.addEventListener('click', () => location.reload());
+                statusText.appendChild(retryBtn);
             }
         }
     }

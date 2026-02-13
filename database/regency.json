@@ -352,7 +352,9 @@
   {
     "id": "1273",
     "province_id": "12",
-    "name": "Kota Sibolga"
+    "name": "Kota Sibolga",
+    "latitude": 1.7427,
+    "longitude": 98.7792
   },
   {
     "id": "1274",
@@ -371,7 +373,9 @@
   {
     "id": "1276",
     "province_id": "12",
-    "name": "Kota Tebing Tinggi"
+    "name": "Kota Tebing Tinggi",
+    "latitude": 3.3254,
+    "longitude": 99.1542
   },
   {
     "id": "1277",
@@ -495,12 +499,16 @@
   {
     "id": "1374",
     "province_id": "13",
-    "name": "Kota Padang Panjang"
+    "name": "Kota Padang Panjang",
+    "latitude": -0.4666,
+    "longitude": 100.3980
   },
   {
     "id": "1375",
     "province_id": "13",
-    "name": "Kota Bukittinggi"
+    "name": "Kota Bukittinggi",
+    "latitude": -0.3056,
+    "longitude": 100.3691
   },
   {
     "id": "1376",
@@ -1072,7 +1080,9 @@
   {
     "id": "3101",
     "province_id": "31",
-    "name": "Administrasi Kepulauan Seribu"
+    "name": "Administrasi Kepulauan Seribu",
+    "latitude": -5.6200,
+    "longitude": 106.6400
   },
   {
     "id": "3171",
@@ -1504,7 +1514,9 @@
   {
     "id": "3371",
     "province_id": "33",
-    "name": "Kota Magelang"
+    "name": "Kota Magelang",
+    "latitude": -7.4706,
+    "longitude": 110.2178
   },
   {
     "id": "3372",
@@ -1817,7 +1829,9 @@
   {
     "id": "3576",
     "province_id": "35",
-    "name": "Kota Mojokerto"
+    "name": "Kota Mojokerto",
+    "latitude": -7.4704,
+    "longitude": 112.4340
   },
   {
     "id": "3577",
@@ -2030,9 +2044,18 @@
     "longitude": 118.76370225560007
   },
   {
-    "id": "52045207",
+    "id": "5204",
     "province_id": "52",
-    "name": "Sumbawa/Sumbawa Barat"
+    "name": "Sumbawa",
+    "latitude": -8.7312,
+    "longitude": 117.4138
+  },
+  {
+    "id": "5207",
+    "province_id": "52",
+    "name": "Sumbawa Barat",
+    "latitude": -8.7652,
+    "longitude": 116.8916
   },
   {
     "id": "5301",
@@ -2616,9 +2639,18 @@
     "longitude": 124.53760618985295
   },
   {
-    "id": "7105/7110",
+    "id": "7105",
     "province_id": "71",
-    "name": "Minahasa Selatan/Bolaang Mongondwo Timur"
+    "name": "Minahasa Selatan",
+    "latitude": 1.1539,
+    "longitude": 124.7000
+  },
+  {
+    "id": "7110",
+    "province_id": "71",
+    "name": "Bolaang Mongondow Timur",
+    "latitude": 0.7286,
+    "longitude": 124.5778
   },
   {
     "id": "7106",
@@ -3089,11 +3121,7 @@
     "latitude": 0.5538339828965961,
     "longitude": 123.26835173517247
   },
-  {
-    "id": "7504",
-    "province_id": "75",
-    "name": "Pahuwato"
-  },
+
   {
     "id": "7504",
     "province_id": "75",

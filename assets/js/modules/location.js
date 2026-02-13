@@ -316,7 +316,7 @@ const SaturaLocation = (function () {
     // ===========================================
 
     /**
-     * Save location to localStorage
+     * Save location to localStorage via SaturaStorage
      * @param {Object} location - Location data to save
      */
     async function saveLocation(location) {
@@ -329,9 +329,10 @@ const SaturaLocation = (function () {
                 timestamp: location.timestamp
             };
 
-            localStorage.setItem(
+            SaturaStorage.set(
                 SaturaConfig.CACHE.keys.userLocation,
-                JSON.stringify(dataToSave)
+                dataToSave,
+                SaturaConfig.CACHE.duration.location
             );
 
             SaturaConfig.log('Location saved to storage');
@@ -341,18 +342,16 @@ const SaturaLocation = (function () {
     }
 
     /**
-     * Get saved location from localStorage
+     * Get saved location from localStorage via SaturaStorage
      * @returns {Promise<Object|null>} - Saved location or null
      */
     async function getSavedLocation() {
         try {
-            const saved = localStorage.getItem(SaturaConfig.CACHE.keys.userLocation);
+            const data = SaturaStorage.get(SaturaConfig.CACHE.keys.userLocation);
 
-            if (!saved) {
+            if (!data) {
                 return null;
             }
-
-            const data = JSON.parse(saved);
 
             // Reconstruct full location from database
             if (data.regencyId) {
@@ -390,7 +389,7 @@ const SaturaLocation = (function () {
      */
     function clearSavedLocation() {
         try {
-            localStorage.removeItem(SaturaConfig.CACHE.keys.userLocation);
+            SaturaStorage.remove(SaturaConfig.CACHE.keys.userLocation);
             currentLocation = null;
             locationSource = null;
             SaturaConfig.log('Saved location cleared');
@@ -407,10 +406,8 @@ const SaturaLocation = (function () {
      */
     function getSavedLocationSync() {
         try {
-            const saved = localStorage.getItem(SaturaConfig.CACHE.keys.userLocation);
-            if (!saved) return null;
-
-            const data = JSON.parse(saved);
+            const data = SaturaStorage.get(SaturaConfig.CACHE.keys.userLocation);
+            if (!data) return null;
 
             // Return minimal location data with coordinates
             if (data.coordinates && data.coordinates.latitude && data.coordinates.longitude) {

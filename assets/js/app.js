@@ -39,29 +39,25 @@ const SaturaApp = (function () {
         SaturaConfig.log('Initializing Satu Ramadhan...');
 
         try {
-            // OPTIMIZATION: Parallel initialization for non-dependent tasks
-            // SW registration and DB preload can happen simultaneously
+            // Parallel init: SW registration and DB preload are independent
             const [swResult] = await Promise.all([
                 registerServiceWorker(),
                 SaturaDatabase.preload()
             ]);
 
-            // Setup online/offline listener early
             setupOnlineListener();
 
-            // OPTIMIZATION: Try to show cached data immediately
-            // OPTIMIZATION: Try to show cached data immediately and initialize prayer module
+            // Show cached schedule immediately while fresh data loads
             const cachedSchedule = SaturaPrayer.initFromCache();
             if (cachedSchedule) {
                 SaturaConfig.log('Showing cached schedule while fetching fresh data');
                 triggerCallbacks('onPrayerTimesFetched', cachedSchedule);
             }
 
-            // OPTIMIZATION: Initialize location WITHOUT GPS first (use cached/default)
-            // This prevents GPS permission dialog from appearing during splash screen
+            // Use cached/default location first (skip GPS to avoid dialog during splash)
             const location = await initializeLocationFast();
 
-            // Fetch fresh prayer times in background (non-blocking if cached)
+            // Fetch fresh prayer times in background
             initializePrayerTimes().then(schedule => {
                 if (schedule) {
                     triggerCallbacks('onPrayerTimesFetched', schedule);
@@ -70,18 +66,15 @@ const SaturaApp = (function () {
                 SaturaConfig.log('Background fetch failed, using cached data:', err.message);
             });
 
-            // Start countdown timer immediately
             startCountdown();
 
             // Mark as initialized
             isInitialized = true;
 
-            // Trigger ready callbacks
             const status = getStatus();
             triggerCallbacks('onReady', status);
 
-            // AFTER splash is hidden, try GPS detection if no location source is GPS
-            // Delay to ensure splash animation completes and user can interact with permission
+            // Retry GPS after splash screen animation completes
             setTimeout(() => {
                 retryGPSDetection();
             }, 1500);
@@ -95,12 +88,6 @@ const SaturaApp = (function () {
             throw error;
         }
     }
-
-    /**
-     * Load cached prayer schedule from storage
-     * @returns {Object|null} - Cached schedule or null
-     */
-
 
     /**
      * Register service worker for PWA
