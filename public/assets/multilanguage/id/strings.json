@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "features": "Fitur",
+    "quran": "Al-Quran",
+    "privacy": "Privasi",
+    "download": "Download",
+    "liveDemo": "Live Demo"
+  },
+  "hero": {
+    "badge": "Tersedia di Google Play",
+    "title": "Pendamping Ibadah",
+    "titleAccent": "Dalam Genggaman.",
+    "desc": "Waktu shalat real-time, Al-Quran lengkap dengan Tajwid, arah Kiblat, Tasbih digital, dan notifikasi Adzan. Gratis selamanya, tanpa iklan, tanpa data pribadi.",
+    "ctaDownload": "Play Store",
+    "ctaDemo": "Coba Live Demo",
+    "stat1Value": "5+",
+    "stat1Label": "Fitur Utama",
+    "stat2Value": "100%",
+    "stat2Label": "Gratis & Tanpa Iklan",
+    "stat3Value": "0",
+    "stat3Label": "Data Dikumpulkan"
+  },
+  "features": {
+    "f1": {
+      "eyebrow": "Waktu Shalat",
+      "title": "Waktu Shalat",
+      "titleAccent": "Akurat Real-Time",
+      "desc": "Waktu shalat yang tepat berdasarkan GPS lokasi Anda. Didukung API Aladhan dengan metode perhitungan NU, Muhammadiyah, dan lainnya.",
+      "bullets": [
+        "Deteksi lokasi otomatis via GPS",
+        "Pilih metode perhitungan sesuai madzhab",
+        "Countdown real-time ke shalat berikutnya",
+        "Tampilan jadwal grid & list yang elegan"
+      ]
+    },
+    "f2": {
+      "eyebrow": "Jadwal & Notifikasi",
+      "title": "Adzan & Pengingat",
+      "titleAccent": "Tepat Waktu",
+      "desc": "Jadwal shalat lengkap satu bulan penuh dengan notifikasi Adzan otomatis. Ekspor jadwal Imsakiyah siap cetak.",
+      "bullets": [
+        "Notifikasi Adzan otomatis tiap waktu shalat",
+        "Pilih suara Adzan (Makkah, Madinah, dll.)",
+        "Jadwal imsakiyah satu bulan penuh",
+        "Generate & simpan jadwal siap cetak"
+      ]
+    },
+    "f3": {
+      "eyebrow": "Al-Quran Digital",
+      "title": "Al-Quran dengan",
+      "titleAccent": "Tajwid Berwarna",
+      "desc": "Baca Al-Quran lengkap 30 Juz dengan Tajwid berwarna, transliterasi Latin, dan terjemahan Bahasa Indonesia.",
+      "bullets": [
+        "Tajwid otomatis dengan kode warna standar",
+        "Terjemahan & transliterasi Latin per ayat",
+        "Putar audio tilawah per ayat",
+        "Bookmark ayat favorit, cari surah & ayat"
+      ]
+    },
+    "f4": {
+      "eyebrow": "Arah Kiblat",
+      "title": "Kompas Kiblat",
+      "titleAccent": "Live & Akurat",
+      "desc": "Arah Kiblat presisi dengan kompas live berbasis sensor perangkat. Peta interaktif rute ke Ka'bah.",
+      "bullets": [
+        "Kompas Kiblat real-time berbasis sensor",
+        "Peta visual rute ke Ka'bah",
+        "Derajat arah Kiblat yang presisi"
+      ]
+    },
+    "f5": {
+      "eyebrow": "Tasbih Digital",
+      "title": "Zikir dengan",
+      "titleAccent": "Tasbih Digital",
+      "desc": "Tasbih digital elegan dengan animasi manik-manik 3D yang realistis. Lacak hitungan zikir dan simpan sesi harian.",
+      "bullets": [
+        "Animasi manik tasbih 3D yang indah",
+        "Simpan & kelola sesi zikir harian",
+        "Atur target hitungan dan putaran",
+        "Kaligrafi Arab untuk setiap zikir"
+      ]
+    },
+    "f6": {
+      "eyebrow": "Kustomisasi",
+      "title": "Sesuaikan",
+      "titleAccent": "Segalanya",
+      "desc": "Tema, bahasa, metode perhitungan, suara adzan, semua bisa disesuaikan sesuai preferensi Anda.",
+      "bullets": [
+        "Pilih tema tampilan (Teal / Dark)",
+        "Bahasa Indonesia & English",
+        "Pilih awal puasa (NU / Muhammadiyah)",
+        "Kustomisasi suara adzan & notifikasi"
+      ]
+    }
+  },
+  "privacy": {
+    "heading": "Privasi Anda",
+    "headingAccent": "Kami Jaga",
+    "desc": "Satu Ramadhan tidak mengumpulkan data pribadi apapun. Tidak ada akun, tidak ada iklan, tidak ada pelacakan.",
+    "card1Title": "Tanpa Data Server",
+    "card1Desc": "Semua preferensi disimpan lokal di perangkat Anda. Tidak ada server yang menyimpan data.",
+    "card2Title": "Tanpa Iklan",
+    "card2Desc": "Tidak ada SDK iklan, analytics pihak ketiga, atau tracking apapun.",
+    "card3Title": "Lokasi Aman",
+    "card3Desc": "GPS hanya untuk waktu shalat dan Kiblat. Koordinat tidak pernah disimpan."
+  },
+  "download": {
+    "heading": "Mulai Ibadah",
+    "headingAccent": "Lebih Khusyuk.",
+    "desc": "Gratis selamanya. Tanpa iklan. Tanpa langganan. Cukup download dan mulai.",
+    "storeSub": "Dapatkan di",
+    "storeMain": "Google Play",
+    "demoBtn": "Coba Live Demo",
+    "meta1Value": "Gratis",
+    "meta1Label": "Selamanya",
+    "meta2Value": "Android",
+    "meta2Label": "Platform",
+    "meta3Value": "8.0+",
+    "meta3Label": "Versi Minimum"
+  },
+  "footer": {
+    "tagline": "Pendamping ibadah Islam yang lengkap, privat, dan gratis. Dibuat untuk umat Muslim Indonesia.",
+    "colApp": "Aplikasi",
+    "colInfo": "Informasi",
+    "privacyPolicy": "Kebijakan Privasi",
+    "contactUs": "Hubungi Kami",
+    "copyright": "Seluruh hak cipta dilindungi."
+  },
+  "marquee": [
+    "Waktu Shalat",
+    "Al-Quran Tajwid",
+    "Adzan Otomatis",
+    "Arah Kiblat",
+    "Tasbih Digital",
+    "Jadwal Imsakiyah",
+    "100% Privat",
+    "Tanpa Iklan"
+  ]
+}

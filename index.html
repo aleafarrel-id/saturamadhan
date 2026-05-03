@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Satu Ramadhan - Aplikasi pendamping ibadah Islam terlengkap. Waktu shalat akurat, Al-Quran dengan Tajwid, Kiblat, Tasbih digital, dan notifikasi Adzan." />
+  <meta name="theme-color" content="#061922" />
+  <meta property="og:title" content="Satu Ramadhan - Pendamping Ibadah Islam" />
+  <meta property="og:description" content="Waktu shalat akurat, Al-Quran Tajwid, Kiblat, Tasbih, dan Adzan." />
+  <meta property="og:image" content="/assets/previews/phone/1.webp" />
+  <title>Satu Ramadhan</title>
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon.png" />
+  <link rel="stylesheet" href="/assets/vendor/boxicons/css/boxicons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/src/css/main.css" />
+  <script type="module" src="/src/js/main.js"></script>
+</head>
+
+<body>
+
+  <header class="nav" id="nav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__logo" aria-label="Satu Ramadhan">
+          <img src="/assets/favicon/favicon.png" alt="Satu Ramadhan" class="nav__logo-img" width="36" height="36" />
+          <span class="nav__logo-text">Satu Ramadhan</span>
+        </a>
+        <nav class="nav__links" aria-label="Navigasi utama">
+          <a href="#fitur" class="nav__link" data-i18n="nav.features">Fitur</a>
+          <a href="#quran" class="nav__link" data-i18n="nav.quran">Al-Quran</a>
+          <a href="#privasi" class="nav__link" data-i18n="nav.privacy">Privasi</a>
+          <a href="#download" class="nav__link" data-i18n="nav.download">Download</a>
+        </nav>
+        <div class="nav__actions">
+          <div class="lang-switcher">
+            <button data-lang-btn="id" class="lang-btn active">ID</button>
+            <button data-lang-btn="en" class="lang-btn">EN</button>
+          </div>
+          <a data-link="liveDemo" class="nav__demo"><i class="bx bx-play-circle"></i> <span
+              data-i18n="nav.liveDemo">Live Demo</span></a>
+          <a data-link="playStore" class="nav__cta"><i class="bx bxl-play-store"></i> <span
+              data-i18n="nav.download">Download</span></a>
+        </div>
+        <button class="nav__burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section id="hero" aria-label="Hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero__pattern" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <h1 class="hero__title"><span data-i18n="hero.title">Pendamping Ibadah</span><br><em
+              data-i18n="hero.titleAccent">Dalam Genggaman.</em></h1>
+          <p class="hero__desc" data-i18n="hero.desc">Waktu shalat real-time, Al-Quran lengkap dengan Tajwid, arah
+            Kiblat, Tasbih digital, dan notifikasi Adzan. Gratis selamanya, tanpa iklan, tanpa data pribadi.</p>
+          <div class="hero__cta-group">
+            <a data-link="playStore" class="btn-primary" id="hero-download"><i class="bx bxl-play-store"></i> <span
+                data-i18n="hero.ctaDownload">Play Store</span></a>
+            <a data-link="liveDemo" class="btn-secondary" id="hero-demo"><i class="bx bx-play-circle"></i> <span
+                data-i18n="hero.ctaDemo">Coba Live Demo</span></a>
+          </div>
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <span class="hero__stat-value" data-i18n="hero.stat1Value">5+</span>
+              <span class="hero__stat-label" data-i18n="hero.stat1Label">Fitur Utama</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-value" data-i18n="hero.stat2Value">100%</span>
+              <span class="hero__stat-label" data-i18n="hero.stat2Label">Gratis & Tanpa Iklan</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-value" data-i18n="hero.stat3Value">0</span>
+              <span class="hero__stat-label" data-i18n="hero.stat3Label">Data Dikumpulkan</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__gallery">
+          <div class="hero__gallery-glow" aria-hidden="true"></div>
+          <img src="/assets/previews/phone/1.webp" alt="Tampilan utama Satu Ramadhan" class="hero__gallery-img"
+            loading="eager" />
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="marquee-section" aria-hidden="true">
+    <div class="marquee-track" data-i18n-list="marquee">
+      <span class="marquee-item">Waktu Shalat <span class="marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <main id="fitur" class="features-section">
+
+    <div class="feature-block">
+      <div class="container">
+        <div class="feature-grid">
+          <div class="feature-content reveal-left">
+            <div class="feature-eyebrow">
+              <span class="feature-eyebrow__num">01</span>
+              <span class="feature-eyebrow__label" data-i18n="features.f1.eyebrow">Waktu Shalat</span>
+            </div>
+            <div class="feature-icon-wrap"><i class="bx bx-time-five"></i></div>
+            <h2 class="feature-title"><span data-i18n="features.f1.title">Waktu Shalat</span> <em
+                data-i18n="features.f1.titleAccent">Akurat Real-Time</em></h2>
+            <p class="feature-desc" data-i18n="features.f1.desc">Waktu shalat yang tepat berdasarkan GPS lokasi Anda.
+              Didukung API Aladhan dengan metode perhitungan NU, Muhammadiyah, dan lainnya.</p>
+            <ul class="feature-bullets" data-i18n-list="features.f1.bullets">
+              <li class="feature-bullet"><i class="bx bx-check"></i> Deteksi lokasi otomatis via GPS</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Pilih metode perhitungan sesuai madzhab</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Countdown real-time ke shalat berikutnya</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Tampilan jadwal grid & list yang elegan</li>
+            </ul>
+          </div>
+          <div class="carousel reveal-right">
+            <div class="carousel__track">
+              <div class="carousel__slide"><img src="/assets/previews/phone/1.webp" alt="Waktu shalat - tampilan utama"
+                  loading="lazy" /></div>
+              <div class="carousel__slide"><img src="/assets/previews/phone/2.webp" alt="Waktu shalat - detail"
+                  loading="lazy" /></div>
+            </div>
+            <div class="carousel__dots"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-block" id="jadwal">
+      <div class="container">
+        <div class="feature-grid feature-grid--reverse">
+          <div class="feature-content reveal-right">
+            <div class="feature-eyebrow">
+              <span class="feature-eyebrow__num">02</span>
+              <span class="feature-eyebrow__label" data-i18n="features.f2.eyebrow">Jadwal & Notifikasi</span>
+            </div>
+            <div class="feature-icon-wrap"><i class="bx bx-bell"></i></div>
+            <h2 class="feature-title"><span data-i18n="features.f2.title">Adzan & Pengingat</span> <em
+                data-i18n="features.f2.titleAccent">Tepat Waktu</em></h2>
+            <p class="feature-desc" data-i18n="features.f2.desc">Jadwal shalat lengkap satu bulan penuh dengan
+              notifikasi Adzan otomatis. Ekspor jadwal Imsakiyah siap cetak.</p>
+            <ul class="feature-bullets" data-i18n-list="features.f2.bullets">
+              <li class="feature-bullet"><i class="bx bx-check"></i> Notifikasi Adzan otomatis tiap waktu shalat</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Pilih suara Adzan (Makkah, Madinah, dll.)</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Jadwal imsakiyah satu bulan penuh</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Generate & simpan jadwal siap cetak</li>
+            </ul>
+          </div>
+          <div class="carousel reveal-left">
+            <div class="carousel__track">
+              <div class="carousel__slide"><img src="/assets/previews/phone/3.webp" alt="Notifikasi Adzan"
+                  loading="lazy" /></div>
+              <div class="carousel__slide"><img src="/assets/previews/phone/4.webp" alt="Jadwal Imsakiyah"
+                  loading="lazy" /></div>
+            </div>
+            <div class="carousel__dots"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-block" id="quran">
+      <div class="container">
+        <div class="feature-grid">
+          <div class="feature-content reveal-left">
+            <div class="feature-eyebrow">
+              <span class="feature-eyebrow__num">03</span>
+              <span class="feature-eyebrow__label" data-i18n="features.f3.eyebrow">Al-Quran Digital</span>
+            </div>
+            <div class="feature-icon-wrap"><i class="bx bx-book-open"></i></div>
+            <h2 class="feature-title"><span data-i18n="features.f3.title">Al-Quran dengan</span> <em
+                data-i18n="features.f3.titleAccent">Tajwid Berwarna</em></h2>
+            <p class="feature-desc" data-i18n="features.f3.desc">Baca Al-Quran lengkap 30 Juz dengan Tajwid berwarna,
+              transliterasi Latin, dan terjemahan Bahasa Indonesia.</p>
+            <ul class="feature-bullets" data-i18n-list="features.f3.bullets">
+              <li class="feature-bullet"><i class="bx bx-check"></i> Tajwid otomatis dengan kode warna standar</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Terjemahan & transliterasi Latin per ayat</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Putar audio tilawah per ayat</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Bookmark ayat favorit, cari surah & ayat</li>
+            </ul>
+          </div>
+          <div class="feature-preview reveal-right">
+            <img src="/assets/previews/phone/7.webp" alt="Al-Quran dengan Tajwid" class="feature-preview__img"
+              loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <div class="container">
+        <div class="feature-grid feature-grid--reverse">
+          <div class="feature-content reveal-right">
+            <div class="feature-eyebrow">
+              <span class="feature-eyebrow__num">04</span>
+              <span class="feature-eyebrow__label" data-i18n="features.f4.eyebrow">Arah Kiblat</span>
+            </div>
+            <div class="feature-icon-wrap"><i class="bx bx-compass"></i></div>
+            <h2 class="feature-title"><span data-i18n="features.f4.title">Kompas Kiblat</span> <em
+                data-i18n="features.f4.titleAccent">Live & Akurat</em></h2>
+            <p class="feature-desc" data-i18n="features.f4.desc">Arah Kiblat presisi dengan kompas live berbasis sensor
+              perangkat. Peta interaktif rute ke Ka'bah.</p>
+            <ul class="feature-bullets" data-i18n-list="features.f4.bullets">
+              <li class="feature-bullet"><i class="bx bx-check"></i> Kompas Kiblat real-time berbasis sensor</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Peta visual rute ke Ka'bah</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Derajat arah Kiblat yang presisi</li>
+            </ul>
+          </div>
+          <div class="feature-preview reveal-left">
+            <img src="/assets/previews/phone/5.webp" alt="Kompas arah Kiblat" class="feature-preview__img"
+              loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <div class="container">
+        <div class="feature-grid">
+          <div class="feature-content reveal-left">
+            <div class="feature-eyebrow">
+              <span class="feature-eyebrow__num">05</span>
+              <span class="feature-eyebrow__label" data-i18n="features.f5.eyebrow">Tasbih Digital</span>
+            </div>
+            <div class="feature-icon-wrap"><i class="bx bx-radio-circle-marked"></i></div>
+            <h2 class="feature-title"><span data-i18n="features.f5.title">Zikir dengan</span> <em
+                data-i18n="features.f5.titleAccent">Tasbih Digital</em></h2>
+            <p class="feature-desc" data-i18n="features.f5.desc">Tasbih digital elegan dengan animasi manik-manik 3D
+              yang realistis. Lacak hitungan zikir dan simpan sesi harian.</p>
+            <ul class="feature-bullets" data-i18n-list="features.f5.bullets">
+              <li class="feature-bullet"><i class="bx bx-check"></i> Animasi manik tasbih 3D yang indah</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Simpan & kelola sesi zikir harian</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Atur target hitungan dan putaran</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Kaligrafi Arab untuk setiap zikir</li>
+            </ul>
+          </div>
+          <div class="feature-preview reveal-right">
+            <img src="/assets/previews/phone/6.webp" alt="Tasbih digital" class="feature-preview__img" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <div class="container">
+        <div class="feature-grid feature-grid--reverse">
+          <div class="feature-content reveal-right">
+            <div class="feature-eyebrow">
+              <span class="feature-eyebrow__num">06</span>
+              <span class="feature-eyebrow__label" data-i18n="features.f6.eyebrow">Kustomisasi</span>
+            </div>
+            <div class="feature-icon-wrap"><i class="bx bx-cog"></i></div>
+            <h2 class="feature-title"><span data-i18n="features.f6.title">Sesuaikan</span> <em
+                data-i18n="features.f6.titleAccent">Segalanya</em></h2>
+            <p class="feature-desc" data-i18n="features.f6.desc">Tema, bahasa, metode perhitungan, suara adzan, semua
+              bisa disesuaikan sesuai preferensi Anda.</p>
+            <ul class="feature-bullets" data-i18n-list="features.f6.bullets">
+              <li class="feature-bullet"><i class="bx bx-check"></i> Pilih tema tampilan (Teal / Dark)</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Bahasa Indonesia & English</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Pilih awal puasa (NU / Muhammadiyah)</li>
+              <li class="feature-bullet"><i class="bx bx-check"></i> Kustomisasi suara adzan & notifikasi</li>
+            </ul>
+          </div>
+          <div class="feature-preview reveal-left">
+            <img src="/assets/previews/phone/8.webp" alt="Pengaturan kustomisasi" class="feature-preview__img"
+              loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <section class="section privacy-section" id="privasi" aria-label="Privasi">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="privacy-heading"><span data-i18n="privacy.heading">Privasi Anda</span> <em
+            data-i18n="privacy.headingAccent">Kami Jaga</em></h2>
+        <p class="privacy-desc" data-i18n="privacy.desc">Satu Ramadhan tidak mengumpulkan data pribadi apapun. Tidak ada
+          akun, tidak ada iklan, tidak ada pelacakan.</p>
+      </div>
+      <div class="privacy-cards">
+        <article class="privacy-card reveal reveal-delay-1">
+          <div class="privacy-card__icon"><i class="bx bx-lock-alt"></i></div>
+          <h3 class="privacy-card__title" data-i18n="privacy.card1Title">Tanpa Data Server</h3>
+          <p class="privacy-card__desc" data-i18n="privacy.card1Desc">Semua preferensi disimpan lokal di perangkat Anda.
+            Tidak ada server yang menyimpan data.</p>
+        </article>
+        <article class="privacy-card reveal reveal-delay-2">
+          <div class="privacy-card__icon"><i class="bx bxs-shield"></i></div>
+          <h3 class="privacy-card__title" data-i18n="privacy.card2Title">Tanpa Iklan</h3>
+          <p class="privacy-card__desc" data-i18n="privacy.card2Desc">Tidak ada SDK iklan, analytics pihak ketiga, atau
+            tracking apapun.</p>
+        </article>
+        <article class="privacy-card reveal reveal-delay-3">
+          <div class="privacy-card__icon"><i class="bx bx-map-pin"></i></div>
+          <h3 class="privacy-card__title" data-i18n="privacy.card3Title">Lokasi Aman</h3>
+          <p class="privacy-card__desc" data-i18n="privacy.card3Desc">GPS hanya untuk waktu shalat dan Kiblat. Koordinat
+            tidak pernah disimpan.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section download-section" id="download" aria-label="Download">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="download-heading"><span data-i18n="download.heading">Mulai Ibadah</span><br><em
+            data-i18n="download.headingAccent">Lebih Khusyuk.</em></h2>
+        <p class="download-desc" data-i18n="download.desc">Gratis selamanya. Tanpa iklan. Tanpa langganan. Cukup
+          download dan mulai.</p>
+      </div>
+      <div class="download-cta-group reveal">
+        <a data-link="playStore" class="btn-store" id="cta-download" aria-label="Download di Google Play Store">
+          <i class="bx bxl-play-store"></i>
+          <span class="btn-store__texts">
+            <span class="btn-store__sub" data-i18n="download.storeSub">Dapatkan di</span>
+            <span class="btn-store__main" data-i18n="download.storeMain">Google Play</span>
+          </span>
+        </a>
+        <a data-link="liveDemo" class="btn-demo-lg" id="cta-demo">
+          <i class="bx bx-play-circle"></i> <span data-i18n="download.demoBtn">Coba Live Demo</span>
+        </a>
+      </div>
+      <div class="download-meta reveal">
+        <div class="download-meta-item">
+          <span class="value" data-i18n="download.meta1Value">Gratis</span>
+          <span class="label" data-i18n="download.meta1Label">Selamanya</span>
+        </div>
+        <div class="download-meta-divider" aria-hidden="true"></div>
+        <div class="download-meta-item">
+          <span class="value" data-i18n="download.meta2Value">Android</span>
+          <span class="label" data-i18n="download.meta2Label">Platform</span>
+        </div>
+        <div class="download-meta-divider" aria-hidden="true"></div>
+        <div class="download-meta-item">
+          <span class="value" data-i18n="download.meta3Value">8.0+</span>
+          <span class="label" data-i18n="download.meta3Label">Versi Minimum</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <img src="/assets/favicon/favicon.png" alt="Satu Ramadhan" class="footer__logo-img" width="36"
+              height="36" />
+            <span class="footer__logo-text">Satu Ramadhan</span>
+          </div>
+          <p class="footer__tagline" data-i18n="footer.tagline">Pendamping ibadah Islam yang lengkap, privat, dan
+            gratis. Dibuat untuk umat Muslim Indonesia.</p>
+          <p class="footer__calligraphy" dir="rtl">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+        </div>
+        <div>
+          <p class="footer__col-title" data-i18n="footer.colApp">Aplikasi</p>
+          <ul class="footer__links">
+            <li><a href="#fitur" class="footer__link" data-i18n="nav.features">Fitur</a></li>
+            <li><a href="#quran" class="footer__link" data-i18n="nav.quran">Al-Quran</a></li>
+            <li><a href="#privasi" class="footer__link" data-i18n="nav.privacy">Privasi</a></li>
+            <li><a href="#download" class="footer__link" data-i18n="nav.download">Download</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title" data-i18n="footer.colInfo">Informasi</p>
+          <ul class="footer__links">
+            <li><a data-link="privacyPolicy" class="footer__link" data-i18n="footer.privacyPolicy">Kebijakan Privasi</a>
+            </li>
+            <li><a data-link="contactEmail" class="footer__link" data-i18n="footer.contactUs">Hubungi Kami</a></li>
+            <li><a data-link="playStore" class="footer__link">Google Play</a></li>
+            <li><a data-link="liveDemo" class="footer__link" data-i18n="nav.liveDemo">Live Demo</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 <a data-link="contactEmail">Alea Farrel</a>. <span
+            data-i18n="footer.copyright">Seluruh hak cipta dilindungi.</span></p>
+        <span class="footer__package">com.saturamadhan.mobile</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+:root {
+  /* Primitive — Primary (Teal) */
+  --clr-primary-300: #4db8b8;
+  --clr-primary-400: #2d9e9e;
+  --clr-primary-500: #1a8a8a;
+  --clr-primary-600: #0f4c5c;
+  --clr-primary-700: #0a3540;
+  --clr-primary-800: #072830;
+  --clr-primary-900: #041a20;
+  --clr-primary-a10: rgba(45,158,158,.1);
+  --clr-primary-a20: rgba(45,158,158,.2);
+  --clr-primary-a30: rgba(45,158,158,.3);
+
+  /* Primitive — Accent (Gold) */
+  --clr-accent-300: #f1d44d;
+  --clr-accent-400: #e8c86e;
+  --clr-accent-500: #d4af37;
+  --clr-accent-600: #c9a227;
+  --clr-accent-a10: rgba(212,175,55,.1);
+  --clr-accent-a20: rgba(212,175,55,.2);
+  --clr-accent-a30: rgba(212,175,55,.3);
+  --clr-accent-a50: rgba(212,175,55,.5);
+
+  /* Neutrals */
+  --clr-white-a05: rgba(255,255,255,.05);
+  --clr-white-a10: rgba(255,255,255,.1);
+  --clr-white-a15: rgba(255,255,255,.15);
+  --clr-white-a30: rgba(255,255,255,.3);
+  --clr-black-a20: rgba(0,0,0,.2);
+  --clr-black-a30: rgba(0,0,0,.3);
+  --clr-black-a40: rgba(0,0,0,.4);
+
+  /* Semantic */
+  --clr-text-primary: #ffffff;
+  --clr-text-secondary: #d0e0f0;
+  --clr-text-muted: #a0b0c0;
+  --clr-text-accent: var(--clr-accent-500);
+
+  --clr-bg-darkest: #030d10;
+  --clr-bg-dark: #061922;
+  --clr-bg-mid: #0a3540;
+  --clr-bg-light: #1a4a5a;
+  --clr-bg-card: rgba(26,58,74,.55);
+  --clr-bg-card-solid: #1a3a4a;
+
+  --clr-border: var(--clr-primary-a30);
+  --clr-border-light: var(--clr-white-a10);
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(160deg, #030d10 0%, #061922 30%, #0a3540 65%, #1a4a5a 100%);
+  --gradient-gold: linear-gradient(135deg, #d4af37, #f1d44d, #d4af37);
+
+  /* Typography — matching app */
+  --ff-primary: 'Poppins', sans-serif;
+  --ff-decorative: 'Amiri', serif;
+  --ff-calligraphy: 'Scheherazade New', serif;
+
+  --fs-xs: .75rem;
+  --fs-sm: .875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 1.875rem;
+  --fs-3xl: 2.25rem;
+  --fs-4xl: 3rem;
+  --fs-5xl: 3.75rem;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Spacing */
+  --sp-1: .25rem;
+  --sp-2: .5rem;
+  --sp-3: .75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+
+  --section-py: clamp(4rem, 8vw, 8rem);
+  --container-max: 1200px;
+  --container-px: clamp(1.25rem, 5vw, 4rem);
+
+  /* Effects */
+  --radius-sm: .375rem;
+  --radius-md: .75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-full: 9999px;
+
+  --shadow-md: 0 4px 12px var(--clr-black-a30);
+  --shadow-lg: 0 12px 40px var(--clr-black-a40);
+  --shadow-glow-gold: 0 0 30px rgba(212,175,55,.3), 0 0 60px rgba(212,175,55,.1);
+  --shadow-glow-teal: 0 0 40px rgba(45,158,158,.25);
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-bounce: 400ms cubic-bezier(.34, 1.56, .64, 1);
+
+  --z-nav: 100;
+}

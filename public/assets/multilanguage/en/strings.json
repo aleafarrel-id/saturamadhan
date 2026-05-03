@@ -1,0 +1,139 @@
+{
+  "nav": {
+    "features": "Features",
+    "quran": "Al-Quran",
+    "privacy": "Privacy",
+    "download": "Download",
+    "liveDemo": "Live Demo"
+  },
+  "hero": {
+    "badge": "Available on Google Play",
+    "title": "Your Worship Companion",
+    "titleAccent": "In One App.",
+    "desc": "Real-time prayer times, complete Al-Quran with Tajweed, Qibla compass, digital Tasbih, and Adhan notifications. Free forever, no ads, no personal data collected.",
+    "ctaDownload": "Play Store",
+    "ctaDemo": "Try Live Demo",
+    "stat1Value": "5+",
+    "stat1Label": "Core Features",
+    "stat2Value": "100%",
+    "stat2Label": "Free & No Ads",
+    "stat3Value": "0",
+    "stat3Label": "Data Collected"
+  },
+  "features": {
+    "f1": {
+      "eyebrow": "Prayer Times",
+      "title": "Accurate Prayer Times",
+      "titleAccent": "In Real-Time",
+      "desc": "Precise prayer times based on your GPS location. Powered by Aladhan API with multiple calculation methods (NU, Muhammadiyah, and more).",
+      "bullets": [
+        "Automatic location detection via GPS",
+        "Choose calculation method by madhhab",
+        "Real-time countdown to next prayer",
+        "Elegant grid & list schedule views"
+      ]
+    },
+    "f2": {
+      "eyebrow": "Schedule & Notifications",
+      "title": "Adhan & Reminders",
+      "titleAccent": "Right On Time",
+      "desc": "Complete monthly prayer schedule with automatic Adhan notifications. Export printable Imsakiyah schedule.",
+      "bullets": [
+        "Automatic Adhan notification for each prayer",
+        "Choose Adhan sounds (Makkah, Madinah, etc.)",
+        "Full month Imsakiyah schedule",
+        "Generate & save printable schedules"
+      ]
+    },
+    "f3": {
+      "eyebrow": "Digital Al-Quran",
+      "title": "Al-Quran with",
+      "titleAccent": "Color-Coded Tajweed",
+      "desc": "Read the complete 30 Juz Al-Quran with color-coded Tajweed, Latin transliteration, and Indonesian translation.",
+      "bullets": [
+        "Automatic Tajweed with standard color codes",
+        "Per-verse translation & Latin transliteration",
+        "Play per-verse recitation audio",
+        "Bookmark favorites, search surah & verse"
+      ]
+    },
+    "f4": {
+      "eyebrow": "Qibla Direction",
+      "title": "Qibla Compass",
+      "titleAccent": "Live & Precise",
+      "desc": "Precise Qibla direction with live compass based on device sensors. Interactive map showing route to Ka'bah.",
+      "bullets": [
+        "Real-time sensor-based Qibla compass",
+        "Visual map route to Ka'bah",
+        "Precise Qibla degree bearing"
+      ]
+    },
+    "f5": {
+      "eyebrow": "Digital Tasbih",
+      "title": "Dhikr with",
+      "titleAccent": "Digital Tasbih",
+      "desc": "Elegant digital Tasbih with realistic 3D bead animations. Track dhikr counts and save daily sessions.",
+      "bullets": [
+        "Beautiful 3D Tasbih bead animation",
+        "Save & manage daily dhikr sessions",
+        "Set count targets and rounds",
+        "Arabic calligraphy for each dhikr"
+      ]
+    },
+    "f6": {
+      "eyebrow": "Customization",
+      "title": "Customize",
+      "titleAccent": "Everything",
+      "desc": "Theme, language, calculation method, Adhan sounds, everything can be customized to your preference.",
+      "bullets": [
+        "Choose display theme (Teal / Dark)",
+        "Indonesian & English languages",
+        "Choose fasting start (NU / Muhammadiyah)",
+        "Customize Adhan sounds & notifications"
+      ]
+    }
+  },
+  "privacy": {
+    "heading": "Your Privacy",
+    "headingAccent": "Is Protected",
+    "desc": "Satu Ramadhan does not collect any personal data. No accounts, no ads, no tracking.",
+    "card1Title": "No Server Data",
+    "card1Desc": "All preferences are stored locally on your device. No server stores your data.",
+    "card2Title": "No Ads",
+    "card2Desc": "No ad SDKs, no third-party analytics, no tracking whatsoever.",
+    "card3Title": "Safe Location",
+    "card3Desc": "GPS is only used for prayer times and Qibla. Coordinates are never stored."
+  },
+  "download": {
+    "heading": "Start Worship",
+    "headingAccent": "More Devoutly.",
+    "desc": "Free forever. No ads. No subscriptions. Just download and begin.",
+    "storeSub": "Get it on",
+    "storeMain": "Google Play",
+    "demoBtn": "Try Live Demo",
+    "meta1Value": "Free",
+    "meta1Label": "Forever",
+    "meta2Value": "Android",
+    "meta2Label": "Platform",
+    "meta3Value": "8.0+",
+    "meta3Label": "Min Version"
+  },
+  "footer": {
+    "tagline": "A complete, private, and free Islamic worship companion. Made with love for Muslims.",
+    "colApp": "Application",
+    "colInfo": "Information",
+    "privacyPolicy": "Privacy Policy",
+    "contactUs": "Contact Us",
+    "copyright": "All rights reserved."
+  },
+  "marquee": [
+    "Prayer Times",
+    "Al-Quran Tajweed",
+    "Auto Adhan",
+    "Qibla Direction",
+    "Digital Tasbih",
+    "Imsakiyah Schedule",
+    "100% Private",
+    "No Ads"
+  ]
+}

@@ -1,0 +1,161 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  padding: var(--sp-4) 0;
+  transition: background var(--transition-normal), padding var(--transition-normal);
+}
+.nav.scrolled {
+  background: rgba(6,25,34,.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: var(--sp-3) 0;
+  box-shadow: 0 1px 0 var(--clr-white-a05), var(--shadow-md);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-shrink: 0;
+}
+.nav__logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.nav__logo-text {
+  font-family: var(--ff-primary);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
+  color: var(--clr-text-primary);
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+}
+.nav__link {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--clr-text-muted);
+  transition: color var(--transition-fast);
+  letter-spacing: .03em;
+}
+.nav__link:hover { color: var(--clr-text-primary); }
+
+.nav__actions { display: flex; align-items: center; gap: var(--sp-4); }
+
+.lang-switcher {
+  display: flex;
+  background: var(--clr-white-a05);
+  border: 1px solid var(--clr-border-light);
+  border-radius: var(--radius-full);
+  padding: 2px;
+  gap: 2px;
+}
+.lang-btn {
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  color: var(--clr-text-muted);
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.lang-btn:hover { color: var(--clr-text-primary); }
+.lang-btn.active {
+  background: var(--clr-primary-a20);
+  color: var(--clr-accent-400);
+}
+
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-5);
+  border-radius: var(--radius-full);
+  background: var(--gradient-gold);
+  color: #1a0f00;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  white-space: nowrap;
+}
+.nav__cta:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow-gold);
+}
+.nav__cta .bx { font-size: 16px; }
+
+.nav__demo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-5);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-secondary);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+.nav__demo:hover {
+  border-color: var(--clr-primary-400);
+  color: var(--clr-text-primary);
+}
+.nav__demo .bx { font-size: 16px; }
+
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--sp-2);
+}
+.nav__burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--clr-text-primary);
+  border-radius: var(--radius-full);
+  transition: transform var(--transition-normal), opacity var(--transition-fast);
+}
+.nav__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__burger.open span:nth-child(2) { opacity: 0; }
+.nav__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav__links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(6,25,34,.97);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    gap: 0;
+    padding: var(--sp-4) 0;
+    border-top: 1px solid var(--clr-border-light);
+  }
+  .nav__links.open { display: flex; }
+  .nav__link {
+    padding: var(--sp-4) var(--sp-6);
+    font-size: var(--fs-base);
+    width: 100%;
+    text-align: center;
+  }
+  .nav__burger { display: flex; }
+  .nav__actions .nav__demo,
+  .nav__actions .nav__cta { display: none; }
+}
