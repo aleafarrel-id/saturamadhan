@@ -45,6 +45,12 @@
 
   --clr-border: var(--clr-primary-a30);
   --clr-border-light: var(--clr-white-a10);
+  --clr-border-glass: rgba(255, 255, 255, 0.08);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(6, 25, 34, 0.7);
+  --glass-bg-accent: rgba(45, 158, 158, 0.08);
+  --glass-blur: blur(16px) saturate(180%);
 
   /* Gradients */
   --gradient-hero: linear-gradient(160deg, #030d10 0%, #061922 30%, #0a3540 65%, #1a4a5a 100%);

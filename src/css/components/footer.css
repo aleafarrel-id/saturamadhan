@@ -47,7 +47,9 @@
   color: var(--clr-text-secondary);
   transition: color var(--transition-fast);
 }
-.footer__link:hover { color: var(--clr-accent-400); }
+@media (hover: hover) {
+  .footer__link:hover { color: var(--clr-accent-400); }
+}
 
 .footer__bottom {
   display: flex;

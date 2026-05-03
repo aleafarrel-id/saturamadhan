@@ -2,10 +2,11 @@
 .marquee-section {
   position: relative;
   padding-block: var(--sp-5);
-  border-top: 1px solid var(--clr-border-light);
-  border-bottom: 1px solid var(--clr-border-light);
-  background: rgba(10,53,64,.3);
+  border-top: 1px solid var(--clr-border-glass);
+  border-bottom: 1px solid var(--clr-border-glass);
+  background: var(--clr-primary-a10);
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 .marquee-track {
   display: flex;
@@ -14,7 +15,9 @@
   animation: marquee-scroll 30s linear infinite;
   width: max-content;
 }
-.marquee-track:hover { animation-play-state: paused; }
+@media (hover: hover) {
+  .marquee-track:hover { animation-play-state: paused; }
+}
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -55,12 +58,13 @@
 .feature-block {
   padding-block: var(--section-py);
   position: relative;
+  overflow: hidden;
 }
 .feature-block:not(:last-child) {
   border-bottom: 1px solid var(--clr-border-light);
 }
 .feature-block:nth-child(even) {
-  background: rgba(10,53,64,.12);
+  background: linear-gradient(to bottom, rgba(10,53,64,.08), rgba(10,53,64,.15));
 }
 
 .feature-content {
@@ -111,9 +115,11 @@
   font-size: 26px;
   color: var(--clr-accent-500);
 }
-.feature-block:hover .feature-icon-wrap {
-  transform: scale(1.06) rotate(-3deg);
-  box-shadow: var(--shadow-glow-gold);
+@media (hover: hover) {
+  .feature-block:hover .feature-icon-wrap {
+    transform: scale(1.06) rotate(-3deg);
+    box-shadow: var(--shadow-glow-gold);
+  }
 }
 
 .feature-title {
@@ -174,8 +180,10 @@
   cursor: zoom-in;
 }
 
-.feature-preview__img:hover {
-  transform: translateY(-4px);
+@media (hover: hover) {
+  .feature-preview__img:hover {
+    transform: translateY(-4px);
+  }
 }
 
 /* Carousel — multi-image */
@@ -311,8 +319,10 @@
   color: var(--clr-text-primary);
 }
 
-.lightbox__close:hover {
-  background: var(--clr-bg-light);
+@media (hover: hover) {
+  .lightbox__close:hover {
+    background: var(--clr-bg-light);
+  }
 }
 
 /* Privacy */
@@ -365,11 +375,13 @@
   opacity: 0;
   transition: opacity var(--transition-normal);
 }
-.privacy-card:hover {
-  border-color: var(--clr-primary-a30);
-  transform: translateY(-4px);
+@media (hover: hover) {
+  .privacy-card:hover {
+    border-color: var(--clr-primary-a30);
+    transform: translateY(-4px);
+  }
+  .privacy-card:hover::before { opacity: 1; }
 }
-.privacy-card:hover::before { opacity: 1; }
 
 .privacy-card__icon {
   display: flex;
@@ -472,10 +484,12 @@
   color: var(--clr-text-primary);
   transition: transform var(--transition-fast), box-shadow var(--transition-normal), border-color var(--transition-fast);
 }
-.btn-store:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-glow-gold);
-  border-color: var(--clr-accent-500);
+@media (hover: hover) {
+  .btn-store:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow-gold);
+    border-color: var(--clr-accent-500);
+  }
 }
 .btn-store .bx { font-size: 32px; color: var(--clr-accent-500); }
 .btn-store__texts { display: flex; flex-direction: column; align-items: flex-start; }
@@ -499,10 +513,12 @@
   transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
 }
 .btn-demo-lg .bx { font-size: 20px; }
-.btn-demo-lg:hover {
-  border-color: var(--clr-primary-400);
-  color: var(--clr-text-primary);
-  background: var(--clr-primary-a10);
+@media (hover: hover) {
+  .btn-demo-lg:hover {
+    border-color: var(--clr-primary-400);
+    color: var(--clr-text-primary);
+    background: var(--clr-primary-a10);
+  }
 }
 
 .download-meta {

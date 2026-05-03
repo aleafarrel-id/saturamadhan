@@ -20,7 +20,9 @@ body {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--clr-bg-darkest); }
 ::-webkit-scrollbar-thumb { background: var(--clr-primary-600); border-radius: var(--radius-full); }
-::-webkit-scrollbar-thumb:hover { background: var(--clr-primary-500); }
+@media (hover: hover) {
+  ::-webkit-scrollbar-thumb:hover { background: var(--clr-primary-500); }
+}
 
 :focus-visible {
   outline: 2px solid var(--clr-accent-500);
