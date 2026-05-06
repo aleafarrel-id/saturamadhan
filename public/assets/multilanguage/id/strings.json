@@ -4,7 +4,7 @@
     "quran": "Al-Quran",
     "privacy": "Privasi",
     "download": "Download",
-    "liveDemo": "Live Demo"
+    "liveDemo": "Versi Web"
   },
   "hero": {
     "badge": "Tersedia di Google Play",
@@ -12,7 +12,7 @@
     "titleAccent": "Dalam Genggaman.",
     "desc": "Waktu shalat real-time, Al-Quran lengkap dengan Tajwid, arah Kiblat, Tasbih digital, dan notifikasi Adzan. Gratis selamanya, tanpa iklan, tanpa data pribadi.",
     "ctaDownload": "Play Store",
-    "ctaDemo": "Coba Live Demo",
+    "ctaDemo": "Coba Versi Web",
     "stat1Value": "5+",
     "stat1Label": "Fitur Utama",
     "stat2Value": "100%",
@@ -110,7 +110,7 @@
     "desc": "Gratis selamanya. Tanpa iklan. Tanpa langganan. Cukup download dan mulai.",
     "storeSub": "Dapatkan di",
     "storeMain": "Google Play",
-    "demoBtn": "Coba Live Demo",
+    "demoBtn": "Coba Versi Web",
     "meta1Value": "Gratis",
     "meta1Label": "Selamanya",
     "meta2Value": "Android",

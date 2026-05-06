@@ -4,7 +4,7 @@
     "quran": "Al-Quran",
     "privacy": "Privacy",
     "download": "Download",
-    "liveDemo": "Live Demo"
+    "liveDemo": "Web Version"
   },
   "hero": {
     "badge": "Available on Google Play",
@@ -12,7 +12,7 @@
     "titleAccent": "In One App.",
     "desc": "Real-time prayer times, complete Al-Quran with Tajweed, Qibla compass, digital Tasbih, and Adhan notifications. Free forever, no ads, no personal data collected.",
     "ctaDownload": "Play Store",
-    "ctaDemo": "Try Live Demo",
+    "ctaDemo": "Try Web Version",
     "stat1Value": "5+",
     "stat1Label": "Core Features",
     "stat2Value": "100%",
@@ -110,7 +110,7 @@
     "desc": "Free forever. No ads. No subscriptions. Just download and begin.",
     "storeSub": "Get it on",
     "storeMain": "Google Play",
-    "demoBtn": "Try Live Demo",
+    "demoBtn": "Try Web Version",
     "meta1Value": "Free",
     "meta1Label": "Forever",
     "meta2Value": "Android",

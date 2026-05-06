@@ -7,9 +7,12 @@ export const APP = {
 
 export const LINKS = {
   playStore: 'https://play.google.com/store/apps/details?id=com.saturamadhan.mobile',
-  liveDemo: 'https://saturamadhan-demo.pages.dev/',
+  liveDemo: 'https://saturamadhan-web.pages.dev/',
   privacyPolicy: 'https://saturamadhan-policy.afarrel.workers.dev/',
-  contactEmail: 'mailto:aleafarrel.dev@gmail.com',
+  contactEmail: {
+    user: 'aleafarrel.dev',
+    domain: 'gmail.com'
+  },
 };
 
 export const NAV_ITEMS = [
