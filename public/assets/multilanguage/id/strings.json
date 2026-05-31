@@ -96,11 +96,11 @@
   "privacy": {
     "heading": "Privasi Anda",
     "headingAccent": "Kami Jaga",
-    "desc": "Satu Ramadhan tidak mengumpulkan data pribadi apapun. Tidak ada akun, tidak ada iklan, tidak ada pelacakan.",
+    "desc": "Satu Ramadhan tidak mengumpulkan data pribadi yang mengidentifikasi Anda. Tidak ada akun dan sepenuhnya bebas iklan.",
     "card1Title": "Tanpa Data Server",
     "card1Desc": "Semua preferensi disimpan lokal di perangkat Anda. Tidak ada server yang menyimpan data.",
     "card2Title": "Tanpa Iklan",
-    "card2Desc": "Tidak ada SDK iklan, analytics pihak ketiga, atau tracking apapun.",
+    "card2Desc": "Tidak ada SDK iklan. Nikmati pengalaman beribadah yang khusyuk tanpa gangguan iklan.",
     "card3Title": "Lokasi Aman",
     "card3Desc": "GPS hanya untuk waktu shalat dan Kiblat. Koordinat tidak pernah disimpan."
   },

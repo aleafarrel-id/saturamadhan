@@ -96,11 +96,11 @@
   "privacy": {
     "heading": "Your Privacy",
     "headingAccent": "Is Protected",
-    "desc": "Satu Ramadhan does not collect any personal data. No accounts, no ads, no tracking.",
+    "desc": "Satu Ramadhan does not collect personally identifiable data. No accounts, and completely ad-free.",
     "card1Title": "No Server Data",
     "card1Desc": "All preferences are stored locally on your device. No server stores your data.",
     "card2Title": "No Ads",
-    "card2Desc": "No ad SDKs, no third-party analytics, no tracking whatsoever.",
+    "card2Desc": "No ad SDKs. Enjoy a devout worship experience without annoying ad interruptions.",
     "card3Title": "Safe Location",
     "card3Desc": "GPS is only used for prayer times and Qibla. Coordinates are never stored."
   },

@@ -123,7 +123,7 @@ export const PRIVACY_CARDS = [
   {
     icon: 'bxs-shield',
     title: 'Tanpa Iklan',
-    desc: 'Tidak ada SDK iklan, analytics pihak ketiga, atau tracking apapun.',
+    desc: 'Tidak ada SDK iklan. Nikmati pengalaman beribadah yang khusyuk tanpa gangguan iklan.',
   },
   {
     icon: 'bx-map-pin',
